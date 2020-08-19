@@ -4,13 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <!-- Font Awsome cdn link -->
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-   
+       
     <title>Navbar</title>
 <style>
 #first-nav .nav-item{
@@ -53,7 +47,7 @@
     </ul>
     <!-- <form class="form-inline my-2 my-lg-0"> -->
       <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-      <button class="btn btn-outline-light my-2 my-sm-0" type="button">Login</button>
+      <a href="login/login.php"><button class="btn btn-outline-light my-2 my-sm-0" type="button">Login</button></a>
     <!-- </form> -->
   </div>
 </nav>
