@@ -23,44 +23,18 @@
         }
         #login-form .form-control{
             border-radius: 10%;
-        }
+          }
 
+        #login-form label{
+          color: #3488fc;
+          font-weight:bold;
+        }
     </style>
 </head>
 <body>
-    <header class="sticky-top" id="first-nav">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3488fc;">
-         <a class="navbar-brand" href="#"><img src="../images/logocopy.png" height="50px" alt="My responsive image."/></a>
-         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-           <span class="navbar-toggler-icon"></span>
-         </button>
-       
-         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-           <ul class="navbar-nav mx-auto">
-             <li class="nav-item active">
-               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-             </li>
-             <li class="nav-item">
-               <a class="nav-link" href="#">About Us</a>
-             </li>
-             <!-- <li class="nav-item dropdown">
-               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                 Dropdown
-               </a>
-               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                 <a class="dropdown-item" href="#">Action</a>
-                 <a class="dropdown-item" href="#">Another action</a>
-                 <div class="dropdown-divider"></div>
-                 <a class="dropdown-item" href="#">Something else here</a>
-               </div>
-             </li> -->
-             <li class="nav-item">
-               <a class="nav-link" href="#">Contact Us</a>
-             </li>
-           </ul>
-       </nav>
-       </header>
+    <?php
+    include('navbar.php');
+    ?>
        <!--=========================== Login Form =======================  -->
        <div class="container mt-3 " id="login-wrapper">
            <center>
@@ -71,29 +45,29 @@
        </div>
        <div class="container border col-5 shadow-lg  p-3 mb-5 bg-white rounded">
     <div class="container pl-0 pr-0" id="login-form">
-        <form method="post" class="form-signin mx-auto text-center"> 
+        <form method="post" class="form-signin mx-auto"> 
             <div class="btn-group w-100" role="group" aria-label="Basic example">
                 <a class="btn btn-light active" href="login.php" role="button">Login</a>
                 <!-- <button type="button" class="btn btn-light active">Login</button> -->
-                <a class="btn btn-light" href="register.php" role="button">Register</a>
+                <a class="btn btn-light" href="register.php" role="button">Sign Up</a>
               </div>        
               <br/><br/> 
-          <h3 class=" mb-3 font-weight-normal">Please sign in</h3>
+          <h3 class=" mb-3 font-weight-normal text-center">Please sign in</h3>
             
-          <label for="inputUsername" class="sr-only">Username</label>
+          <label for="inputUsername" >Username</label>
           <input name="username" type="text" id="inputname" class="form-control" placeholder="Username" required autofocus>
           <br/>
           <!-- <label for="inputEmail" class="sr-only">Email address</label>
           <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
           <br/> -->
-          <label for="inputPassword" class="sr-only">Password</label>
+          <label for="inputPassword" >Password</label>
           <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
           <br/>
           <button name="signin" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
           <br/>
-          <!-- <a href="signup.php" class="mt-5 mb-3 text-secondary">Create an account</a> -->
-          <a href="#" class="mt-5 mb-3 text-danger">Forgot Password?</a>
- 
+          <center>
+          <a href="forgot.php" class="mt-5 mb-3 text-danger">Forgot Password?</a>
+          </center>
         </form>
       </div>
     </div>

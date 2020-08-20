@@ -26,46 +26,19 @@
         }
 
         .avatar-pic {
-width: 80px;
-cursor: pointer;
-}
-
+            width: 80px;
+            cursor: pointer;
+        }
+        #register-form label{
+          color: #3488fc;
+          font-weight:bold;
+        }
     </style>
 </head>
 <body>
-    <header class="sticky-top" id="first-nav">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3488fc;">
-         <a class="navbar-brand" href="#"><img src="../images/logocopy.png" height="50px" alt="My responsive image."/></a>
-         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-           <span class="navbar-toggler-icon"></span>
-         </button>
-       
-         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-           <ul class="navbar-nav mx-auto">
-             <li class="nav-item active">
-               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-             </li>
-             <li class="nav-item">
-               <a class="nav-link" href="#">About Us</a>
-             </li>
-             <!-- <li class="nav-item dropdown">
-               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                 Dropdown
-               </a>
-               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                 <a class="dropdown-item" href="#">Action</a>
-                 <a class="dropdown-item" href="#">Another action</a>
-                 <div class="dropdown-divider"></div>
-                 <a class="dropdown-item" href="#">Something else here</a>
-               </div>
-             </li> -->
-             <li class="nav-item">
-               <a class="nav-link" href="#">Contact Us</a>
-             </li>
-           </ul>
-       </nav>
-       </header>
+<?php
+include('navbar.php');
+?>
        <!--=========================== Login Form =======================  -->
        <div class="container mt-3 " id="register-wrapper">
            <center>
@@ -80,10 +53,10 @@ cursor: pointer;
             <div class="btn-group w-100" role="group" aria-label="Basic example">
                 <a class="btn btn-light" href="login.php" role="button">Login</a>
                 <!-- <button type="button" class="btn btn-light active">Login</button> -->
-                <a class="btn btn-light active" href="register.php" role="button">Register</a>
+                <a class="btn btn-light active" href="register.php" role="button">Sign Up</a>
               </div>        
               <br/><br/> 
-          <h3 class=" mb-3 font-weight-normal">Registeration</h3>
+          <h3 class=" mb-3 font-weight-normal">Sign Up</h3>
           <form class="md-form" method="post" enctype="multipart/form-data">
   <div class="file-field">
     <div class="mb-2">
@@ -92,7 +65,7 @@ cursor: pointer;
     <div class="d-flex justify-content-center">
       <div class="  float-left">
         <!-- <span>Add photo</span> -->
-        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="profileImage" onChange="displayImage(this)" id="profileImage" class="form-control" style="display: none;">
+        <input type="file"  name="profileImage" onChange="displayImage(this)" id="profileImage" class="form-control" style="display: none;">
       </div>
     </div>
   </div>
@@ -108,28 +81,41 @@ cursor: pointer;
     <label for="exampleInputPassword1">Password</label>
     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
+  <div class="form-group ">
+  <label for="form_phone" class=" col-form-label">Phone</label>
+    <input class="form-control" type="tel" placeholder="+92-12345678" id="form_phone">
+</div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">City</label>
       <input type="text" class="form-control" id="inputCity" placeholder="Karachi">
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
       <label for="inputCountry">Country</label>
       <input type="text" class="form-control" id="inputCountry" placeholder="Pakistan">
     </div>
     </div>
-    <div class="form-group ">
-  <label for="example-tel-input" class=" col-form-label">Phone</label>
-    <input class="form-control" type="tel" value="1-(555)-555-5555" id="example-tel-input">
-</div>
   <div class="form-group">
     <label for="inputAddress">Address</label>
     <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
   </div>
+  <div class="form-group">
+      <label>Secret Question</label>
+      <select class="form-control">
+        <option selected>Choose...</option>
+        <option>What is your pet name?</option>
+        <option>Which is your favourite movie?</option>
+        <option>Who is your favourite cricketer?</option>
+      </select>
+    </div>
+    <div class="form-group">
+    <label for="inputtext">Secret Answer</label>
+    <input type="text" class="form-control" id="inputtext" placeholder="Shahid Afridi">
+  </div>
 <center>
-  <button type="submit" class="btn btn-primary">Register</button>
+  <button type="submit" class="btn btn-primary">Sign Up</button>
   <br/><br/>
-          <a href="#" class="mt-5 mb-3 text-danger ">Forgot Password?</a>
+          <a href="forgot.php" class="mt-5 mb-3 text-danger ">Forgot Password?</a>
  </center>
         </form>
       </div>
