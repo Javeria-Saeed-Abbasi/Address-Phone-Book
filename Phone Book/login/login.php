@@ -1,3 +1,6 @@
+<?php
+require_once ('../db/config.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,7 +69,7 @@
           <button name="signin" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
           <br/>
           <center>
-          <a href="forgot.php" class="mt-5 mb-3 text-danger">Forgot Password?</a>
+          <a href="verification.php" class="mt-5 mb-3 text-danger">Forgot Password?</a>
           </center>
         </form>
       </div>

@@ -1,3 +1,6 @@
+<?php
+require_once ('../db/config.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,7 +118,6 @@ include('navbar.php');
 <center>
   <button type="submit" class="btn btn-primary">Sign Up</button>
   <br/><br/>
-          <a href="forgot.php" class="mt-5 mb-3 text-danger ">Forgot Password?</a>
  </center>
         </form>
       </div>
