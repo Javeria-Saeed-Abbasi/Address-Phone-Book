@@ -1,3 +1,4 @@
+<?php require_once('../db/config.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,7 +101,6 @@ section {
     background-color:#3488fc;
 }
 
-/* =====================================FOOTER ENDS================================== */
 
     </style>
 </head>
@@ -113,7 +113,7 @@ section {
 			<div class="row text-center text-xs-center text-sm-left text-md-left">
 
 				<div class="col-xs-12 col-sm-4 col-md-4">
-                    <img src="images/logocopy.png" width="120px" height="100px" />
+                    <img src="../images/logocopy.png" width="120px" height="100px" />
                     <br/><br/>   
           <h5>About</h5>
           <p>The “KONTACT”  will provide a complete solution to the management of personal contacts for people belonging to all age groups and all types of professions</p>
@@ -123,9 +123,9 @@ section {
           <h5>Pages</h5>
           <hr class="mission-hr"/>
 					<ul class="list-unstyled quick-links">
-						<li><a href="index.php"><i class="fa fa-angle-double-right"></i>Home</a></li>
+						<li><a href="#"><i class="fa fa-angle-double-right"></i>Home</a></li>
 						<li><a href="about.php"><i class="fa fa-angle-double-right"></i>About</a></li>
-						<li><a href="contactus.php"><i class="fa fa-angle-double-right"></i>Contact</a></li>
+						<li><a href="#"><i class="fa fa-angle-double-right"></i>Contact</a></li>
 
 					</ul>
 				</div>
@@ -158,7 +158,7 @@ section {
           <div class="container">
             <h4>Developed by: (Bc170200029) Javeria Saeed Abbasi</h4>
             <h5>Final Year Project 2020</h5>
-            <h6><img src="images/vu.png" width="70px" height="50px"/> Virtual University Of Pakistan</h6>
+            <h6><img src="../images/vu.png" width="70px" height="50px"/> Virtual University Of Pakistan</h6>
           </div>
 				</div>
 				<hr>

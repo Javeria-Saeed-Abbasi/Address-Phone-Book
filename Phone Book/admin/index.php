@@ -15,7 +15,7 @@ require('../db/config.php');
 
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>User Dashboard</title>
+    <title>Admin Dashboard</title>
 <style>
 #download-btn a:hover{
     background-color:#3488fc;
@@ -29,6 +29,8 @@ require('../db/config.php');
 include('includes/navbar.php');
 ?>
 <!-- ================================= Section =============================== -->
+
+
 <?php
 include('includes/sidewrapper.php');
 ?>
@@ -53,7 +55,7 @@ include('includes/sidewrapper.php');
                     <div class="container">
                     <center>
                     <div class="btn-group pt-5  my-2 my-lg-0 ">
-                    <a class="btn btn-light" href="newcontact.php" role="button">Add New Contact</a>
+                    <a class="btn btn-light" href="adduser.php" role="button">Add New User</a>
                     &nbsp;&nbsp;&nbsp;
                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
@@ -73,8 +75,8 @@ include('includes/sidewrapper.php');
 </div>
               <!-- //jumbotorn ends div -->
                     </div>
-                    <div class="container" id="contact-list">
-                    <h3 class="text-center">CONTACT LIST</h3>
+                    <div class="container" id="users-list">
+                    <h3 class="text-center">USERS LIST</h3>
                     </div>
                     <!-- contact table -->
                     <div class="container shadow-lg pt-5 pb-5">
@@ -82,30 +84,35 @@ include('includes/sidewrapper.php');
                     <thead class="bg-primary text-white">
                         <tr>
                         <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
+                        <th scope="col">Username</th>
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
                         <th scope="col">Address</th>
                         <th scope="col">City</th>
                         <th scope="col">Country</th>
+                        <th scope="col">Contacts</th>
                         <th scope="col">Action</th>
+                        
+                        
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                         <th scope="row">1</th>
                         <td>Mark</td>
-                        <td>Otto</td>
                         <td>@mdo</td>
                         <td>@mdo</td>
                         <td>@mdo</td>
                         <td>@mdo</td>
                         <td>@mdo</td>
                         <td align="center">
+							<a href="#" class="text-primary"><i class="fa fa-fw fa-eye"></i>View</a>
+						</td>
+                        <td align="center">
 							<a href="editcontact.php" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
 							<a href="#" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
-						</td>
+                        </td>
+                        
                         </tr>
                         <tr>
                         <th scope="row">2</th>

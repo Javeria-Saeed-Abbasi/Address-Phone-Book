@@ -28,7 +28,7 @@
         <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About Us</a>
+        <a class="nav-link" href="about.php">About</a>
       </li>
       <!-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -42,7 +42,7 @@
         </div>
       </li> -->
       <li class="nav-item">
-        <a class="nav-link" href="#">Contact Us</a>
+        <a class="nav-link" href="contactus.php">Contact Us</a>
       </li>
     </ul>
     <!-- <form class="form-inline my-2 my-lg-0"> -->
@@ -52,18 +52,7 @@
   </div>
 </nav>
 </header>
-<!-- Search bar -->
-<br/>
- <form class="form-inline my-2 my-lg-0">
- <div class="input-group w-50 mx-auto">
-    <input type="search" class="form-control" placeholder="Search" aria-label="Search">
-    <div class="input-group-append">
-      <button class="btn btn-secondary" type="button">
-        <i class="fa fa-search"></i>
-      </button>
-    </div>
-  </div>
-  </form>
+
  
 </body>
 </html>

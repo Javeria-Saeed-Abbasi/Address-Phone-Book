@@ -10,6 +10,21 @@
 <body>
  <?php
  require('navbar.php');
+ ?>
+ <!-- Search bar -->
+<br/>
+ <form class="form-inline my-2 my-lg-0">
+ <div class="input-group w-50 mx-auto">
+    <input type="search" class="form-control" placeholder="Search" aria-label="Search">
+    <div class="input-group-append">
+      <button class="btn btn-secondary" type="button">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+  </div>
+  </form>
+  
+  <?php
  include('slider.php');
  include('services.php');
  include('demolist.php');

@@ -15,7 +15,7 @@ require('../db/config.php');
 
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>User Dashboard</title>
+    <title>View All Contacts</title>
 <style>
 #download-btn a:hover{
     background-color:#3488fc;
@@ -30,7 +30,7 @@ include('includes/navbar.php');
 ?>
 <!-- ================================= Section =============================== -->
 <?php
-include('includes/sidewrapper.php');
+   include('includes/sidewrapper.php');a
 ?>
         <!-- ================ Content Div ==================== -->
         <div class="col-8 col-md-10 col-lg-10 pt-2 bg-light overflow-auto" style="max-height:460px;">

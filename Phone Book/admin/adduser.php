@@ -13,7 +13,7 @@ require_once ('../db/config.php');
     <!-- Font Awsome cdn link -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <title>Register</title>
+    <title>Add User By Admin</title>
     <style>
         #register-wrapper h2{
             color: #3488fc;
@@ -40,9 +40,14 @@ require_once ('../db/config.php');
 </head>
 <body>
 <?php
-include('navbar.php');
+include('includes/navbar.php');
 ?>
+<!-- =============== Side Bar wrapper =================== -->
+<?php
+    include('includes/sidewrapper.php');
+    ?> 
        <!--=========================== Login Form =======================  -->
+       <div class="col-8 col-md-10 col-lg-10 pt-2 bg-light overflow-auto" style="max-height:460px;">
        <div class="container mt-3 " id="register-wrapper">
            <center>
             <img src="../images/kontact.png" class="img-fluid"/>
@@ -54,9 +59,9 @@ include('navbar.php');
     <div class="container pl-0 pr-0" id="register-form">
         <form method="post" class="form-signin mx-auto text-center"> 
             <div class="btn-group w-100" role="group" aria-label="Basic example">
-                <a class="btn btn-light" href="login.php" role="button">Login</a>
+                <!-- <a class="btn btn-light" href="login.php" role="button">Login</a> -->
                 <!-- <button type="button" class="btn btn-light active">Login</button> -->
-                <a class="btn btn-light active" href="register.php" role="button">Sign Up</a>
+                <a class="btn btn-light active" href="#" role="button">Sign Up</a>
               </div>        
               <br/><br/> 
           <h3 class=" mb-3 font-weight-normal">Sign Up</h3>
@@ -122,9 +127,11 @@ include('navbar.php');
         </form>
       </div>
     </div>
-    <!-- ================= Footer  =============================== -->
+
+    </div> <!------//second col div ends here---------->
+        <!-- ================= Footer  =============================== -->
     <?php
-    include('loginfooter.php');
+    include('includes/footer.php');
         ?>
 </body>
 <script src="js/script.js"></script>

@@ -124,8 +124,8 @@ section {
           <hr class="mission-hr"/>
 					<ul class="list-unstyled quick-links">
 						<li><a href="#"><i class="fa fa-angle-double-right"></i>Home</a></li>
-						<li><a href="#"><i class="fa fa-angle-double-right"></i>About</a></li>
-						<li><a href="#"><i class="fa fa-angle-double-right"></i>Contact</a></li>
+						<li><a href="about.php"><i class="fa fa-angle-double-right"></i>About</a></li>
+						<li><a href="contactus.php"><i class="fa fa-angle-double-right"></i>Contact</a></li>
 
 					</ul>
 				</div>
@@ -156,7 +156,7 @@ section {
      			<div class="row text-white text-center" id="footer-last">
 				<div class="col-xs-12 col-sm-12 col-md-12 mt-2">
           <div class="container">
-            <h4>Made by: (Bc170200029) Javeria Saeed Abbasi</h4>
+            <h4>Developed by: (Bc170200029) Javeria Saeed Abbasi</h4>
             <h5>Final Year Project 2020</h5>
             <h6><img src="../images/vu.png" width="70px" height="50px"/> Virtual University Of Pakistan</h6>
           </div>

@@ -1,5 +1,5 @@
 <?php
-require_once ('../db/config.php');
+require('../db/config.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,57 +13,44 @@ require_once ('../db/config.php');
     <!-- Font Awsome cdn link -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <title>Register</title>
-    <style>
-        #register-wrapper h2{
-            color: #3488fc;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-        }
-         #register-form h3{
-            color: #3488fc;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-
-        }
-        #register-form .form-control{
-            border-radius: 10%;
-        }
-
-        .avatar-pic {
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>User Profile Page</title>
+<style>
+.avatar-pic {
             width: 80px;
             cursor: pointer;
         }
-        #register-form label{
+        #profile-form label{
           color: #3488fc;
           font-weight:bold;
         }
-    </style>
+</style>
 </head>
 <body>
+
 <?php
-include('navbar.php');
+include('includes/navbar.php');
 ?>
-       <!--=========================== Login Form =======================  -->
-       <div class="container mt-3 " id="register-wrapper">
-           <center>
-            <img src="../images/kontact.png" class="img-fluid"/>
-            <h2 class="mt-3">WELCOME</h2>
-        </center>
-          
-       </div>
-       <div class="container border col-5 shadow-lg  p-3 mb-5 bg-white rounded">
-    <div class="container pl-0 pr-0" id="register-form">
-        <form method="post" class="form-signin mx-auto text-center"> 
-            <div class="btn-group w-100" role="group" aria-label="Basic example">
-                <a class="btn btn-light" href="login.php" role="button">Login</a>
-                <!-- <button type="button" class="btn btn-light active">Login</button> -->
-                <a class="btn btn-light active" href="register.php" role="button">Sign Up</a>
-              </div>        
-              <br/><br/> 
-          <h3 class=" mb-3 font-weight-normal">Sign Up</h3>
-          <form class="md-form" method="post" enctype="multipart/form-data">
+<!-- ============ Side Bar Wrapper ================== -->
+<?php
+include('includes/sidewrapper.php');
+?>
+<!-- ================= Profile Edit Form ================== -->
+<div class="col-8 col-md-10 col-lg-10 pt-2 bg-light overflow-auto" style="max-height:460px;">
+<div class="card bg-primary" >
+			<!-- <div class="card-header">
+			<strong>Username</strong> 
+				<a href="index.php" class="float-right btn btn-dark btn-sm">
+				<i class="fa fa-fw fa-globe"></i>	Contact List</a>
+			 </div> -->
+			<div class="card-body">
+				
+				<div class=" col-md-8 col-lg-6 mx-auto bg-warning" id="edit-userprofile" >
+<form class="md-form" method="post" enctype="multipart/form-data" id="profile-form">
   <div class="file-field">
     <div class="mb-2">
-      <img src="../images/upload img.png" onClick="triggerClick()" id="profileDisplay" class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
+     <center> <img src="../images/upload img.png" onClick="triggerClick()" id="profileDisplay" class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar"></center>
     </div>
     <div class="d-flex justify-content-center">
       <div class="  float-left">
@@ -116,16 +103,18 @@ include('navbar.php');
     <input type="text" class="form-control" id="inputtext" placeholder="Shahid Afridi">
   </div>
 <center>
-  <button type="submit" class="btn btn-primary">Sign Up</button>
+  <button type="submit" class="btn btn-primary">Save</button>
   <br/><br/>
  </center>
         </form>
-      </div>
-    </div>
-    <!-- ================= Footer  =============================== -->
-    <?php
-    include('loginfooter.php');
-        ?>
+
+</div>
+</div>
+</div>
+      </div> <!----//Second Col div --------->
+      <?php
+include('includes/footer.php');
+?>
 </body>
 <script src="js/script.js"></script>
 </html>
