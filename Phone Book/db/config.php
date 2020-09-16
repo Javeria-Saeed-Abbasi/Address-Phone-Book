@@ -11,4 +11,5 @@ if ($dbConn-> connect_error)
 }
 echo "Connection Successful" ;
 
+
 ?>
