@@ -1,5 +1,6 @@
 <?php
 require_once ('../db/config.php');
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +23,27 @@ require_once ('../db/config.php');
 
 </style>
 <body>
+<?php
+if (isset($_POST['submit'])) {
+
+if($_SERVER['REQUEST_METHOD']=="POST") {
+$fname = $_POST['fname'];
+$lname = $_POST['surname'];
+$email = $_POST['email'];
+$message = $_POST['message'];
+
+$query = "INSERT INTO `contact_us`(`id`, `first_name`, `last_name`, `email`, `message` , `date`) VALUES ( NULL , '".$fname."' , '".$lname."' , '".$email."' , '".$message."' , CURRENT_TIMESTAMP )";
+if ($dbConn->query($query)) {
+   echo "INSERTED".$dbConn->error; 
+}
+else{
+    echo "not inserted";
+}
+}
+
+}
+?>
+
     <?php
     include('includes/navbar.php');
     ?> 
@@ -48,7 +70,7 @@ require_once ('../db/config.php');
             <div class="col-md-12">
                 <div class="form-group cont-text">
                     <label for="form_name">Firstname *</label>
-                    <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname*"   data-error="Firstname is required.">
+                    <input id="form_name" type="text" name="fname" class="form-control" placeholder="Please enter your firstname*"   data-error="Firstname is required.">
                     <div class="help-block with-errors"></div>
                 </div>
             </div>

@@ -1,3 +1,6 @@
+<?php
+include('./db/config.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -105,6 +108,24 @@ section {
     </style>
 </head>
 <body>
+<?php
+if (isset($_POST['submit'])) {
+
+if($_SERVER['REQUEST_METHOD']== "POST") {
+$email = $_POST['email'];
+$message = $_POST['message'];
+
+$query = "INSERT INTO `feed_back`(`id`, `email`, `message` , `date`) VALUES ( NULL , '".$email."' , '".$message."' , CURRENT_TIMESTAMP )";
+if ($dbConn->query($query)) {
+   echo "INSERTED".$dbConn->error; 
+}
+else{
+    echo "NOT inserted";
+}
+}
+
+}
+?>
       <!--========================== Footer ======================================-->
       <div class="container-fluid  bg-dark">
         <!-- Footer -->
@@ -133,17 +154,17 @@ section {
 					<h5>Feed Back </h5>
                     <ul class="list-unstyled">
                         <li>
-                            <form>
+                            <form id="feedback-form" method="POST" action="landing.php" role="form">
                                 <div class="form-group">
                                   <label for="exampleInputEmail1" class="text-white">Email address</label>
-                                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                  <input type="email" name ="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                                   <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1" class="text-white">Message</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea class="form-control" name= "message" id="exampleFormControlTextarea1" rows="3"></textarea>
                                   </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" name= "submit" class="btn btn-primary">Submit</button>
                               </form>
                     
                        

@@ -30,7 +30,7 @@ include('includes/navbar.php');
 ?>
 <!-- ================================= Section =============================== -->
 <?php
-   include('includes/sidewrapper.php');a
+   include('includes/sidewrapper.php');
 ?>
         <!-- ================ Content Div ==================== -->
         <div class="col-8 col-md-10 col-lg-10 pt-2 bg-light overflow-auto" style="max-height:460px;">

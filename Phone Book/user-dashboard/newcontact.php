@@ -1,5 +1,6 @@
 <?php
 require('../db/config.php');
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +24,9 @@ require('../db/config.php');
 		</style>
 </head>
 <body>
+<?php
+
+?>
 	<?php include('includes/navbar.php'); ?>
 
 
