@@ -54,13 +54,17 @@ require_once ('../db/config.php');
       $address= $_POST['address'];
       $sec_ques = $_POST['sec_question'];
       $sec_answ = $_POST['sec_answer'];
+
+      
+
   
     $query = "INSERT INTO `requests` (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_question`,`sec_answer`,`date`) VALUES (NULL, '$profilepic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
-
+    
+    
      $result = mysqli_query($dbConn,$query);
 
      if(mysqli_query($dbConn,$query)){
-      echo "Records inserted successfully.";
+      echo "<script>alert('Records inserted successfully. Your account reqest is now pending for approval by admin. Please wait for confirmation. Thank you.')</script>";
   } else{
       echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
   }
@@ -85,7 +89,7 @@ require_once ('../db/config.php');
 
 // echo $query;      
 //   if ($dbConn->query($query) === TRUE) {
-//     echo "<script>alert('Your account request is now pending for approval by admin. Please wait for confirmation. Thank you.')</script>";
+//     echo "u<script>alert('Your account reqest is now pending for approval by admin. Please wait for confirmation. Thank you.')</script>";
 // } else {
 //     echo "Error: " . $query . "<br>" . $dbConn->error;
 // }
