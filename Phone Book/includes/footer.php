@@ -109,23 +109,23 @@ section {
 </head>
 <body>
 <?php
-if (isset($_POST['submit'])) {
+ if(isset($_POST['submit']))
+ {
+  $email = $_POST['email'];
+  $message = $_POST['message'];
+  
+  $query = "INSERT INTO `feed_back`(`id`, `email`, `message` , `date`) VALUES ( NULL , '".$email."' , '".$message."' , CURRENT_TIMESTAMP )";
+    
+     $result = mysqli_query($dbConn,$query);
 
-if($_SERVER['REQUEST_METHOD']== "POST") {
-$email = $_POST['email'];
-$message = $_POST['message'];
-
-$query = "INSERT INTO `feed_back`(`id`, `email`, `message` , `date`) VALUES ( NULL , '".$email."' , '".$message."' , CURRENT_TIMESTAMP )";
-if ($dbConn->query($query)) {
-   echo "INSERTED".$dbConn->error; 
-}
-else{
-    echo "NOT inserted";
-}
-}
-
-}
-?>
+     if(mysqli_query($dbConn,$query)){
+      echo "INSERTED";
+  } else{
+      echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
+  }
+   
+ }
+ ?>
       <!--========================== Footer ======================================-->
       <div class="container-fluid  bg-dark">
         <!-- Footer -->
@@ -154,7 +154,7 @@ else{
 					<h5>Feed Back </h5>
                     <ul class="list-unstyled">
                         <li>
-                            <form id="feedback-form" method="POST" action="landing.php" role="form">
+                            <form id="feedback-form" class="md-form" method="POST"  >
                                 <div class="form-group">
                                   <label for="exampleInputEmail1" class="text-white">Email address</label>
                                   <input type="email" name ="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">

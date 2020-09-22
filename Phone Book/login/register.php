@@ -68,6 +68,13 @@ require_once ('../db/config.php');
       echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
   }
    
+  //For Authentication of unique Username and Email:
+    $query_username = " SELECT * FROM accounts WHERE username ='$username'";
+    $query_email = " SELECT * FROM accounts WHERE email ='$email'";
+    $res_u = mysqli_query($dbConn,  $query_username);
+    $res_e = mysqli_query($dbConn, $query_email);
+    
+    
  }
  
 //   if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -93,29 +100,7 @@ require_once ('../db/config.php');
 //     echo "Error: " . $query . "<br>" . $dbConn->error;
 // }
 // }
-//  if(isset($_POST['signup'])){
-//   $profilePic = $_POST['profileImage'];
-//   $username = $_POST['username'];
-//   $email = $_POST['email'];
-//   $password = $_POST['password'];
-//   $phone= $_POST['phone'];
-//   $city= $_POST['city'];
-//   $country= $_POST['country'];
-//   $address= $_POST['address'];
-//   $sec_ques = $_POST['sec_question'];
-//   $sec_answ = $_POST['sec_answer'];
 
-  
-
-  
-//   // $message = "$lastname $firstname would like to request an account.";
-//   $query = "INSERT INTO `requests` (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_question`,`sec_answer`,`date`) VALUES (NULL,'$profilePic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
-//   if(performQuery($query)){
-//       echo "<script>alert('Your account request is now pending for approval by admin. Please wait for confirmation. Thank you.')</script>";
-//   }else{
-//       echo "<script>alert('Username or Email Already exists.')</script>";
-//   }
-// }
 ?>
 <?php
 include('navbar.php');
@@ -153,12 +138,16 @@ include('navbar.php');
     </div>
   </div>
 
+<div id="error_msg"></div>
 <div class="form-group">
     <label for="inputUsername" >Username</label>
-    <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required>  </div>
+    <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required>  
+    <span></span>
+    </div>
 <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+    <span></span>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
