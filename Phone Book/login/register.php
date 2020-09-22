@@ -36,11 +36,17 @@ require_once ('../db/config.php');
           color: #3488fc;
           font-weight:bold;
         }
+        #register-form .form-group span{
+          color:red;
+
+        }
     </style>
 </head>
 <body>
 
 <?php
+$username = "";
+$email = "";
  if(isset($_POST['signup']))
  {
       $profilepic = $_POST['profileavatar'];
@@ -54,27 +60,42 @@ require_once ('../db/config.php');
       $sec_ques = $_POST['sec_question'];
       $sec_answ = $_POST['sec_answer'];
 
-      
-
-  
-    $query = "INSERT INTO `requests` (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_question`,`sec_answer`,`date`) VALUES (NULL, '$profilepic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
-    
-    
-     $result = mysqli_query($dbConn,$query);
-
-     if(mysqli_query($dbConn,$query)){
-      echo "<script>alert('Records inserted successfully. Your account reqest is now pending for approval by admin. Please wait for confirmation. Thank you.')</script>";
-  } else{
-      echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
-  }
-   
-  //For Authentication of unique Username and Email:
-    $query_username = " SELECT * FROM accounts WHERE username ='$username'";
-    $query_email = " SELECT * FROM accounts WHERE email ='$email'";
+      //For Authentication of unique Username and Email:
+    $query_username = " SELECT * FROM requests WHERE username ='$username'";
+    $query_email = " SELECT * FROM requests WHERE email ='$email'";
     $res_u = mysqli_query($dbConn,  $query_username);
     $res_e = mysqli_query($dbConn, $query_email);
     
+    if (mysqli_num_rows($res_u) > 0) {
+  	  $name_error = "Sorry... username already taken"; 	
+  	}else if(mysqli_num_rows($res_e) > 0){
+  	  $email_error = "Sorry... email already taken"; 	
+  	}else{
+      $query = "INSERT INTO `requests` (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_question`,`sec_answer`,`date`) VALUES (NULL, '$profilepic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
+           $results = mysqli_query($dbConn, $query);
+           if(mysqli_query($dbConn,$query)){
+            echo "<script>alert('Records inserted successfully. Your account reqest is now pending for approval by admin. Please wait for confirmation. Thank you.')</script>";
+        } else{
+            echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
+        }
+        exit();
+  	}
+      
+
+  
+    // $query = "INSERT INTO `requests` (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_question`,`sec_answer`,`date`) VALUES (NULL, '$profilepic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
     
+    
+  //    $result = mysqli_query($dbConn,$query);
+
+  //    if(mysqli_query($dbConn,$query)){
+  //     echo "<script>alert('Records inserted successfully. Your account reqest is now pending for approval by admin. Please wait for confirmation. Thank you.')</script>";
+  // } else{
+  //     echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
+  // }
+   
+  
+  
  }
  
 //   if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -125,7 +146,7 @@ include('navbar.php');
               <br/><br/> 
           <h3 class=" mb-3 font-weight-normal">Sign Up</h3>
          </div>
-          <form class="md-form"  method="post" enctype="multipart/form-data">
+          <form class="md-form" action="register.php" method="post" enctype="multipart/form-data">
   <div class="file-field">
     <div class="mb-2">
       <img src="../images/upload img.png" onClick="triggerClick()" id="profileDisplay" class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
@@ -138,17 +159,35 @@ include('navbar.php');
     </div>
   </div>
 
-<div id="error_msg"></div>
+  <div id="error_msg" <?php if (isset($name_error)): ?> class="form_error" <?php endif ?> >
+	  <div class="form-group">
+    <label for="inputUsername" >Username</label>
+    <input type="text" name="username" value="<?php echo $username; ?>" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required>  
+	  <?php if (isset($name_error)): ?>
+	  	<span><?php echo $name_error; ?></span>
+	  <?php endif ?>
+  	</div>
+  </div>
+<!-- <div id="error_msg" <?php if (isset($name_error)): ?> class="form_error" <?php endif ?>></div>
 <div class="form-group">
     <label for="inputUsername" >Username</label>
     <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required>  
     <span></span>
-    </div>
-<div class="form-group">
+    </div> -->
+    <div id="error_msg" <?php if (isset($email_error)): ?> class="form_error" <?php endif ?> >
+	  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" name="email" value="<?php echo $email; ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+	  <?php if (isset($email_error)): ?>
+	  	<span><?php echo $email_error; ?></span>
+	  <?php endif ?>
+  	</div>
+  </div>
+<!-- <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
     <span></span>
-  </div>
+  </div> -->
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
