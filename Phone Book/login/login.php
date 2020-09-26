@@ -1,5 +1,7 @@
 <?php
+session_start();
 require_once ('../db/config.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +37,17 @@ require_once ('../db/config.php');
     </style>
 </head>
 <body>
+<?php
+
+ if(isset($_POST['signin']))
+ {
+   
+ }
+
+
+?>
+
+
     <?php
     include('navbar.php');
     ?>

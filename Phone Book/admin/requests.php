@@ -24,7 +24,11 @@ require('../db/config.php');
 </style>
 </head>
 <body>
+<?php
+$query = "SELECT * from `requests`;";
+$result = mysqli_query($dbConn,$query);
 
+?>
 <?php
 include('includes/navbar.php');
 ?>
