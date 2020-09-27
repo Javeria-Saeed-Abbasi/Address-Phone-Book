@@ -15,7 +15,7 @@ require('../db/config.php');
 
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>Requests Page</title>
+    <title>Accepted Requests Page</title>
 <style>
 #download-btn a:hover{
     background-color:#3488fc;
@@ -24,7 +24,31 @@ require('../db/config.php');
 </style>
 </head>
 <body>
-
+<!--================ For Accept Request =========== -->
+<?php
+ $id = $_GET['id'];
+ $query = "select * from `requests` where `id` = '$id'; ";
+ $result = mysqli_query($dbConn,$query);
+ if(mysqli_num_rows($result) > 0 ){
+     while($row = mysqli_fetch_assoc($result)){
+            $username = $row['username'];
+            $email = $row['email'];
+            $password = $row['password'];
+            $status = $row['status'];
+            $query = "INSERT INTO `registered_users` (`id`, `username`, `email`, `password`, `date`) VALUES (NULL, '$username', '$email', '$password', CURRENT_TIMESTAMP);";
+     }
+     $query2 .= "UPDATE `requests` SET `status`='accepted'  WHERE `requests`.`id` = '$id';";
+     $result = mysqli_query($dbConn, $query2);
+     if (mysqli_query($dbConn,$query2)) {
+         echo "<div> Account has been accepted </div>";
+     } else {
+        echo "ERROR: Could not able to execute $query2. " . mysqli_error($dbConn);
+     }
+     
+ }
+ 
+ 
+?>
 <?php
 include('includes/navbar.php');
 ?>
@@ -78,60 +102,7 @@ include('includes/sidewrapper.php');
                     </div>
                     <!-- Requests contact table -->
                     <div class="container shadow-lg pt-5 pb-5 bg-warning overflow-auto">
-                    <table class="table table-striped table-responsive-sm w-auto">
-                    <thead class="bg-primary text-white">
-                        <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">City</th>
-                        <th scope="col">Country</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Accept</th>
-                        <th scope="col">Reject</th>
-                        <th scope="col">Action</th>
-                        
-                        
-                        </tr>
-                    </thead>
-                    <?php
-                        $query = "SELECT * from `requests`;";
-                        $result = mysqli_query($dbConn,$query);
-
-                        while($row= mysqli_fetch_array($result)){
-
-                        ?>
-                        <tr>
-                        <th scope="row"><?php echo $row['id']; ?></th>
-                        <td><?php echo $row['username']; ?></td>
-                        <td><?php echo $row['email']; ?></td>
-                        <td><?php echo $row['phone']; ?></td>
-                        <td><?php echo $row['city']; ?></td>
-                        <td><?php echo $row['country']; ?></td>
-                        <td><?php echo $row['address']; ?></td>
-                        <td><small><i><date><?php echo $row['date']; ?></date></i></small></td>
-                        <td><button class="btn btn-secondary my-2">Pending</button></td>
-
-                        <td><a href="accept.php" class="btn btn-success my-2">Accept</a></td>
-
-                        <td><a href="" class="btn btn-danger my-2">Reject</a></td>
-                        
-                        <td align="center">
-							<a href="editcontact.php" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
-							<a href="#" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
-                        </td>
-                        
-                        </tr>
-                        
-                    </tbody>
-                    <?php
-                        }
-                        ?>
-                    </table>
-
+                    
                     </div>
                     
               
