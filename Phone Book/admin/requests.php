@@ -111,11 +111,11 @@ include('includes/sidewrapper.php');
                         <td>@mdo</td>
                         <td>@mdo</td>
                         <td><small><i><date>10-Sep-2020</date></i></small></td>
-                        <td><button class="btn btn-secondary my-2">Pending</button></td>
+                        <td><a><button class="btn btn-secondary my-2">Pending</button><a></td>
 
-                        <td><button class="btn btn-success my-2">Accepted</button></td>
+                        <td><a><button class="btn btn-success my-2">Accepted</button></a></td>
 
-                        <td><button class="btn btn-danger my-2">Rejected</button></td>
+                        <td><a href="reject.php?id=<?php echo $row['id'] ?>" class="btn btn-danger my-2">Rejected</a></td>
 
                         <td align="center">
 							<a href="editcontact.php" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
