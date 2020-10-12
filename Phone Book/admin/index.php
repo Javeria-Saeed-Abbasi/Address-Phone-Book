@@ -1,5 +1,10 @@
 <?php
+   session_start(); //we need session for the log in thingy XD 
 require('../db/config.php');
+    if($_SESSION['login']!==true){
+        header('location:login/login.php');
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

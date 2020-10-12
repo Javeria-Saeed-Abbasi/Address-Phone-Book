@@ -1,5 +1,7 @@
 <?php
-require_once ('../db/config.php');
+include ('../../db/config.php');
+session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +15,7 @@ require_once ('../db/config.php');
     <!-- Font Awsome cdn link -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <title>Login</title>
+    <title>Login</title> 
     <style>
         #login-wrapper h2{
             color: #3488fc;
@@ -35,13 +37,27 @@ require_once ('../db/config.php');
     </style>
 </head>
 <body>
+<?php
+if (isset($_POST['signin']))
+{
+  $username= $_POST['email'];
+  $password= $_POST ['password'];
+
+$query = "SELECT * from `admin`;";
+$result = mysqli_query($dbConn,$query);
+
+} 
+
+
+
+?>
     <?php
     include('navbar.php');
     ?>
        <!--=========================== Login Form =======================  -->
        <div class="container mt-3 " id="login-wrapper">
            <center>
-            <img src="../images/kontact.png" class="img-fluid"/>
+            <img src="../../images/kontact.png" class="img-fluid"/>
             <h2 class="mt-3">WELCOME</h2>
         </center>
           
@@ -52,7 +68,7 @@ require_once ('../db/config.php');
             <div class="btn-group w-100" role="group" aria-label="Basic example">
                 <a class="btn btn-light active" href="login.php" role="button">Login</a>
                 <!-- <button type="button" class="btn btn-light active">Login</button> -->
-                <a class="btn btn-light" href="register.php" role="button">Sign Up</a>
+                <!-- <a class="btn btn-light" href="register.php" role="button">Sign Up</a> -->
               </div>        
               <br/><br/> 
           <h3 class=" mb-3 font-weight-normal text-center">Please sign in</h3>

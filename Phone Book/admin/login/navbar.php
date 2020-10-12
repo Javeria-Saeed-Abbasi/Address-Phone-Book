@@ -9,7 +9,7 @@
 <header class="sticky-top" id="first-nav">
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3488fc;">
-         <a class="navbar-brand" href="../index.php"><img src="../images/logocopy.png" height="50px" alt="My responsive image."/></a>
+         <a class="navbar-brand" href="../index.php"><img src="../../images/logocopy.png" height="50px" alt="My responsive image."/></a>
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
            <span class="navbar-toggler-icon"></span>
          </button>

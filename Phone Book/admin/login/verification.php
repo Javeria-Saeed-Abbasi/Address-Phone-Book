@@ -1,5 +1,5 @@
 <?php
-require_once ('../db/config.php');
+require_once ('../../db/config.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +24,7 @@ require_once ('../db/config.php');
      <!--=========================== Login Form =======================  -->
        <div class="container mt-3 ">
            <center>
-            <img src="../images/kontact.png" class="img-fluid"/>
+            <img src="../../images/kontact.png" class="img-fluid"/>
 
         </center>
           <br/>
