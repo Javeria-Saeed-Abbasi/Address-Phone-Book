@@ -14,7 +14,7 @@ section {
 
 
 #footer h5{
-	padding-left: 10px;
+	  padding-left: 10px;
     border-left: 3px solid #eeeeee;
     padding-bottom: 6px;
     margin-bottom: 20px;
