@@ -40,15 +40,33 @@ session_start();
 <?php
 if (isset($_POST['signin']))
 {
-  $username= $_POST['email'];
+  $username= $_POST['username'];
   $password= $_POST ['password'];
 
-$query = "SELECT * from `admin`;";
-$result = mysqli_query($dbConn,$query);
+$query = "SELECT * from `admin` WHERE  `username` = '".$username."' AND `password` ='".$password."' ;";
+// if ($result=$dbConn->query($query)) {
+      
+  if($result->num_rows>0)  
 
-} 
+  {
 
+     $row = $result->fetch_assoc();
+      
+     
+      $_SESSION['username'] = $row['username'];
+    
+      $_SESSION['password'] = $row['password'];
+       header("Location:index.php"); 
+  }
+  else
+  {
 
+     echo "Username/Password is incorrect";
+  }
+
+}
+else { "query unsucessful". $dbConn->error;
+}
 
 ?>
     <?php
