@@ -42,7 +42,7 @@ session_start();
 				
 				<div class=" col-6 col-sm-6 col-md-6 mx-auto" id="edit-contact">
 					<!-- <h5 class="card-title">Fields with <span class="text-danger">*</span> are mandatory!</h5> -->
-					<form method="post">
+					<form method="POST" action="crud-contacts/addcont.php">
 						<div class="form-group ">
 							<label>First Name <span class="text-danger">*</span></label>
 							<input type="text" name="firstname" id="firstname" class="form-control" value="<?php echo $row[0]['username']; ?>" placeholder="Enter first name" required>
@@ -61,21 +61,21 @@ session_start();
 						</div>
 						<div class="form-group">
 							<label for="inputAddress">Address</label>
-							<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+							<input type="text" class="form-control" name="address" id="inputAddress" placeholder="1234 Main St">
 						</div>
 						<div class="form-group">
 							<label for="inputCity">City</label>
-							<input type="text" class="form-control" id="inputCity" placeholder="Karachi">
+							<input type="text" class="form-control" name="city" id="inputCity" placeholder="Karachi">
 						</div>
 						<div class="form-group ">
 							<label for="inputCountry">Country</label>
-							<input type="text" class="form-control" id="inputCountry" placeholder="Pakistan">
+							<input type="text" class="form-control" name="country" id="inputCountry" placeholder="Pakistan">
 						</div>
 						
 					
 						<div class="form-group">
 							<input type="hidden" name="editId" id="editId" value="<?php echo $_REQUEST['editId']?>">
-							<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Add Contact</button>
+							<button type="submit" name="insertData" value="submit" id="submit" class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Add Contact</button>
                             <br/><br/><br/>
 							<center><a href="index.php">Back to Contact List</a><center>
                         </div>

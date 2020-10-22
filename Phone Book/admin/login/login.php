@@ -38,35 +38,59 @@ session_start();
 </head>
 <body>
 <?php
+
 if (isset($_POST['signin']))
 {
   $username= $_POST['username'];
   $password= $_POST ['password'];
 
-$query = "SELECT * from `admin` WHERE  `username` = '".$username."' AND `password` ='".$password."' ;";
-// if ($result=$dbConn->query($query)) {
-      
-  if($result->num_rows>0)  
+$query = "SELECT * from `admin` WHERE  username = '".$username."' AND  password ='".$password."' ;";
+// if ($result=$dbConn->query($query)) {}
+$result = mysqli_query ($dbConn , $query);    
 
-  {
+if (mysqli_num_rows($result) ==1) {
+  $_SESSION ['message'] = "You are logged in";
+  $_SESSION ['username'] = $username ;
+  header("location:./index.php");
+  // echo "next page";
+}
+else{
+  $_SESSION ['message'] = "query unscusssesful" . $dbConn->error;
+}
+// else { "query unsucessful". $dbConn->error;
 
-     $row = $result->fetch_assoc();
+}
+ 
+
+// if (isset($_POST['signin']))
+// {
+//   $username= $_POST['username'];
+//   $password= $_POST ['password'];
+
+// $query = "SELECT * from `admin` WHERE  `username` = '".$username."' AND `password` ='".$password."' ;";
+// // if ($result=$dbConn->query($query)) {}
+// $result =$dbConn->query($query) ;    
+//   if($result->num_rows>0)  
+
+//   {
+
+//      $row = $result->fetch_assoc();
       
      
-      $_SESSION['username'] = $row['username'];
+//       $_SESSION['username'] = $row['username'];
     
-      $_SESSION['password'] = $row['password'];
-       header("Location:index.php"); 
-  }
-  else
-  {
+//       $_SESSION['password'] = $row['password'];
+//        header("Location:./index.php"); 
+//   }
+//   else
+//   {
 
-     echo "Username/Password is incorrect";
-  }
+//      echo "Username/Password is incorrect";
+//   }
 
-}
-else { "query unsucessful". $dbConn->error;
-}
+// }
+// else { "query unsucessful". $dbConn->error;
+// }
 
 ?>
     <?php
@@ -82,7 +106,7 @@ else { "query unsucessful". $dbConn->error;
        </div>
        <div class="container border col-5 shadow-lg  p-3 mb-5 bg-white rounded">
     <div class="container pl-0 pr-0" id="login-form">
-        <form method="post" class="form-signin mx-auto"> 
+        <form action="login.php" method="POST" class="form-signin mx-auto"> 
             <div class="btn-group w-100" role="group" aria-label="Basic example">
                 <a class="btn btn-light active" href="login.php" role="button">Login</a>
                 <!-- <button type="button" class="btn btn-light active">Login</button> -->
