@@ -1,10 +1,14 @@
-<?php require_once('../db/config.php'); ?>
 <?php
-$_SESSION ($_GET['id']);
-    // Insert data into the database
+ require_once('../../db/config.php'); 
+session_start();
+?>
+<?php
+// $_SESSION['user-id'] = $userID;
+// $_SESSION ($_GET['user-id']);
+
+    // $_GET['id']= $id;
     if(ISSET($_POST['insertData']))
     {
-      $_SESSION['user_id'] = $id;
       $firstname = $_POST['firstname'];
       $lastname = $_POST['lastname'];
       $email = $_POST['email'];
@@ -15,7 +19,7 @@ $_SESSION ($_GET['id']);
       
       
 
-        $sql = "INSERT INTO `users_contact` (firstname, lastname, email`, skills, designation, created_date) VALUES('$firstname', '$lastname', '$address', '$skills', '$designation', NOW())";       
+        $sql = " INSERT INTO `users_contact` (`id`, `user-id`, `first-name`, `lastname`, email`, `phone`, `address`, `city` , `country`) VALUES ( NULL , '$firstname', '$lastname', '$address', '$city', '$country')";       
         $result = mysqli_query($dbConn, $sql);
 
         if($result){

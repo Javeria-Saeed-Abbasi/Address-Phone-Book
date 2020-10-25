@@ -44,20 +44,25 @@ session_start();
 					<!-- <h5 class="card-title">Fields with <span class="text-danger">*</span> are mandatory!</h5> -->
 					<form method="POST" action="crud-contacts/addcont.php">
 						<div class="form-group ">
-							<label>First Name <span class="text-danger">*</span></label>
-							<input type="text" name="firstname" id="firstname" class="form-control" value="<?php echo $row[0]['username']; ?>" placeholder="Enter first name" required>
+							<label>First Name </label>
+							<!-- <input type="text" name="firstname" id="firstname" class="form-control" value="<?php echo $row[0]['username']; ?>" placeholder="Enter first name" required> -->
+							<input type="text" name="firstname" id="firstname" class="form-control"  placeholder="Enter first name" required>
+
 						</div>
 						<div class="form-group ">
-							<label>Last Name <span class="text-danger">*</span></label>
-							<input type="text" name="lastname" id="lastname" class="form-control" value="<?php echo $row[0]['username']; ?>" placeholder="Enter last name" required>
+							<label>Last Name </label>
+							<!-- <input type="text" name="lastname" id="lastname" class="form-control" value="<?php echo $row[0]['username']; ?>" placeholder="Enter last name" required> -->
+							<input type="text" name="lastname" id="lastname" class="form-control"  placeholder="Enter last name" required>
 						</div>
 						<div class="form-group">
-							<label>Email <span class="text-danger">*</span></label>
-							<input type="email" name="email" id="email" class="form-control" value="<?php echo $row[0]['useremail']; ?>" placeholder="Enter email" required>
+							<label>Email </label>
+							<!-- <input type="email" name="email" id="email" class="form-control" value="<?php echo $row[0]['useremail']; ?>" placeholder="Enter email" required> -->
+							<input type="email" name="email" id="email" class="form-control"  placeholder="Enter email" required>
 						</div>
 						<div class="form-group">
-							<label>Phone <span class="text-danger">*</span></label>
-							<input type="tel" name="userphone" id="userphone" maxlength="12" class="form-control" value="<?php echo $row[0]['userphone']; ?>" placeholder="Enter phone" required>
+							<label>Phone </label>
+							<!-- <input type="tel" name="userphone" id="userphone" maxlength="12" class="form-control" value="<?php echo $row[0]['userphone']; ?>" placeholder="Enter phone" required> -->
+							<input type="tel" name="userphone" id="userphone" maxlength="12" class="form-control" placeholder="Enter phone" required>
 						</div>
 						<div class="form-group">
 							<label for="inputAddress">Address</label>
@@ -74,7 +79,7 @@ session_start();
 						
 					
 						<div class="form-group">
-							<input type="hidden" name="editId" id="editId" value="<?php echo $_REQUEST['editId']?>">
+							<!-- <input type="hidden" name="editId" id="editId" value="<?php echo $_REQUEST['editId']?>"> -->
 							<button type="submit" name="insertData" value="submit" id="submit" class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Add Contact</button>
                             <br/><br/><br/>
 							<center><a href="index.php">Back to Contact List</a><center>

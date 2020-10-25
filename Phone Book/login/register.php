@@ -49,7 +49,7 @@ $username = "";
 $email = "";
  if(isset($_POST['signup']))
  {
-      $profilepic = $_POST['profileavatar'];
+      // $profilepic = $_POST['profileavatar'];
       $username = $_POST['username'];
       $email = $_POST['email'];
       $password = $_POST['password'];
@@ -81,7 +81,7 @@ $email = "";
         exit();
   	}
       
-
+  
   
     // $query = "INSERT INTO `requests` (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_question`,`sec_answer`,`date`) VALUES (NULL, '$profilepic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
     
@@ -154,7 +154,7 @@ include('navbar.php');
     <div class="d-flex justify-content-center">
       <div class="  float-left">
         <!-- <span>Add photo</span> -->
-        <input type="file"  name="profileavatar" onChange="displayImage(this)" id="profileImage" class="form-control" style="display: none;">
+        <!-- <input type="file"  name="profileavatar" onChange="displayImage(this)" id="profileImage" class="form-control" style="display: none;"> -->
       </div>
     </div>
   </div>

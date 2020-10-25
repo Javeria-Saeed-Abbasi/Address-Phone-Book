@@ -19,7 +19,19 @@ require('../db/config.php');
 <style>
 #download-btn a:hover{
     background-color:#3488fc;
-    color:#fff;
+    color:#fff; 
+}
+.dt-buttons{
+    display: flex;
+    justify-content: center;
+}
+.dt-button{
+    border:transparent;
+    color:white;
+    border-radius:30%;
+    padding:5px 10px 5px 10px;
+    margin: 2px;
+    background-color: #2c964c;
 }
 </style>
 </head>
@@ -78,7 +90,7 @@ include('includes/sidewrapper.php');
                     </div>
                     <!-- Requests contact table -->
                     <div class="container shadow-lg pt-5 pb-5 bg-warning overflow-auto">
-                    <table class="table table-striped table-responsive-sm w-auto">
+                    <table class="table table-striped table-responsive-sm w-auto" id="contacts-data">
                     <thead class="bg-primary text-white">
                         <tr>
                         <th scope="col">#</th>
@@ -97,22 +109,23 @@ include('includes/sidewrapper.php');
                         
                         </tr>
                     </thead>
+                    <tbody>
                     <?php
                         $query = "SELECT * from `requests`;";
                         $result = mysqli_query($dbConn,$query);
-
-                        while($row= mysqli_fetch_array($result)){
+                        if ($result->num_rows > 0) {
+                        while($rows= mysqli_fetch_array($result)){
 
                         ?>
                         <tr>
-                        <th scope="row"><?php echo $row['id']; ?></th>
-                        <td><?php echo $row['username']; ?></td>
-                        <td><?php echo $row['email']; ?></td>
-                        <td><?php echo $row['phone']; ?></td>
-                        <td><?php echo $row['city']; ?></td>
-                        <td><?php echo $row['country']; ?></td>
-                        <td><?php echo $row['address']; ?></td>
-                        <td><small><i><date><?php echo $row['date']; ?></date></i></small></td>
+                        <th scope="row"><?php echo $rows['id']; ?></th>
+                        <td><?php echo $rows['username']; ?></td>
+                        <td><?php echo $rows['email']; ?></td>
+                        <td><?php echo $rows['phone']; ?></td>
+                        <td><?php echo $rows['city']; ?></td>
+                        <td><?php echo $rows['country']; ?></td>
+                        <td><?php echo $rows['address']; ?></td>
+                        <td><small><i><date><?php echo $rows['date']; ?></date></i></small></td>
                         <td><button class="btn btn-secondary my-2">Pending</button></td>
 
                         <td><a href="accept.php" class="btn btn-success my-2">Accept</a></td>
@@ -125,11 +138,12 @@ include('includes/sidewrapper.php');
                         </td>
                         
                         </tr>
-                        
-                    </tbody>
-                    <?php
+                        <?php
                         }
+                    }
                         ?>
+                    </tbody>
+                    
                     </table>
                     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.jqueryui.min.css"/>

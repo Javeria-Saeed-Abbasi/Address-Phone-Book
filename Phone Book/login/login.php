@@ -39,10 +39,28 @@ require_once ('../db/config.php');
 <body>
 <?php
 
- if(isset($_POST['signin']))
- {
-   
- }
+if (isset($_POST['signin']))
+{
+  $username= $_POST['username'];
+  $password= $_POST ['password'];
+
+$query = "SELECT * from `registered_users` WHERE  username = '".$username."' AND  password ='".$password."' ;";
+// if ($result=$dbConn->query($query)) {}
+$result = mysqli_query ($dbConn , $query);    
+
+if (mysqli_num_rows($result) ==1) {
+  $_SESSION ['message'] = "You are logged in";
+  $_SESSION ['username'] = $username ;
+  header("location:./user-dashboard/index.php");
+  // echo "next page";
+}
+else{
+  $_SESSION ['message'] = "query unscusssesful" . $dbConn->error;
+}
+// else { "query unsucessful". $dbConn->error;
+
+}
+
 
 
 ?>

@@ -1,5 +1,11 @@
 <?php
 require('../db/config.php');
+session_start();
+include('../db/config.php');
+    // if($_SESSION['login']!==true){
+    //     header('location:../login/login.php');
+    // }
+// $_SESSION['user-id'] = $userID;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,11 +28,7 @@ require('../db/config.php');
     color:#fff;
 }
 </style>
-<script type="text/javascript">
-        $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();   
-        });
-    </script>
+
 </head>
 <body>
 
@@ -98,33 +100,34 @@ include('includes/sidewrapper.php');
                         </tr>
                     </thead>
                     <tbody>
+                    <?php
+                        //  $_SESSION['user-id'] = $userID;
+                        // $query = "select * from `users_contact` where `user-id` = '$userID'; ";
+
+                        $query ="select * from `users_contact`; ";
+                        $result = mysqli_query($dbConn,$query);
+                        while($row= mysqli_fetch_array($result)){
+
+                        ?>
                         <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                        <th scope="row"><?php echo $row['id']; ?></th>
+                        <td><?php echo $row['first-name']; ?></td>
+                        <td><?php echo $row['last-name']; ?></td>
+                        <td><?php echo $row['email']; ?></td>
+                        <td><?php echo $row['phone']; ?></td>
+                        <td><?php echo $row['address']; ?></td>
+                        <td><?php echo $row['city']; ?></td>
+                        <td><?php echo $row['country']; ?></td>
                         <td align="center">
 							<a href="editcontact.php" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
 							<a href="#" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
 						</td>
                         </tr>
-                        <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                        </tr>
+                        
                     </tbody>
+                    <?php
+                        }
+                        ?>
                     </table>
                     </div>
                     
