@@ -14,7 +14,7 @@ session_start();
     <!-- Font Awsome cdn link -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <title>Add User By Admin</title>
+    <title>Update Request By Admin</title>
     <style>
         #register-wrapper h2{
             color: #3488fc;
@@ -41,8 +41,8 @@ session_start();
 </head>
 <body>
 <?php
-$username = "";
-$email = "";
+// $username = "";
+// $email = "";
  if(isset($_POST['addUser']))
  {
       // $profilepic = $_POST['profileavatar'];
@@ -101,17 +101,18 @@ include('includes/navbar.php');
             <div class="btn-group w-100" role="group" aria-label="Basic example">
                 <!-- <a class="btn btn-light" href="login.php" role="button">Login</a> -->
                 <!-- <button type="button" class="btn btn-light active">Login</button> -->
-                <a class="btn btn-light active" href="#" role="button">Add User</a>
+                <a class="btn btn-light active" href="#" role="button">Update Request</a>
               </div>        
               <br/><br/> 
-          <h3 class=" mb-3 font-weight-normal">Add User</h3>
+          <h3 class=" mb-3 font-weight-normal">Update Request</h3>
           </div>
           <form class="md-form" action="adduser.php" method="post" enctype="multipart/form-data">
-         <center>
+          <center>
           <div class="file-field">
     <div class="mb-2">
       <img src="../images/upload img.png" onClick="triggerClick()" id="profileDisplay" class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
     </div>
+ 
     <div class="d-flex justify-content-center">
       <div class="  float-left">
         <!-- <span>Add photo</span> -->
@@ -185,7 +186,7 @@ include('includes/navbar.php');
     <input type="text" name="sec_answer" class="form-control" id="inputtext" placeholder="Shahid Afridi">
   </div>
 <center>
-  <button type="submit" name="addUser" class="btn btn-primary">Add</button>
+  <button type="submit" name="addUser" class="btn btn-primary" >UPDATE</button>
   <br/><br/>
  </center>
         </form>

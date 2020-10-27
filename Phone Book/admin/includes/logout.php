@@ -5,10 +5,10 @@ session_start();
 // header("Location:.../login/login.php");
 // echo " Helo World" ;
 
-// if(isset($_POST['logout'])){
-//     session_destroy();
-//     header('location:login/login.php');
-// }
+if(isset($_POST['logout'])){
+    session_destroy();
+    header('location:login/login.php');
+}
 
 
 ?>

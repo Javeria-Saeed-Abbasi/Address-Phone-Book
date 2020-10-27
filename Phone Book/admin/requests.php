@@ -1,5 +1,6 @@
 <?php
 require('../db/config.php');
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -133,8 +134,8 @@ include('includes/sidewrapper.php');
                         <td><a href="" class="btn btn-danger my-2">Reject</a></td>
                         
                         <td align="center">
-							<a href="editcontact.php" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
-							<a href="#" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
+							<a href="update-request.php" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
+							<a href="delete-request.php" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
                         </td>
                         
                         </tr>

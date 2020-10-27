@@ -22,11 +22,12 @@ session_start();
         $sql = " INSERT INTO `users_contact` (`id`, `user-id`, `first-name`, `lastname`, email`, `phone`, `address`, `city` , `country`) VALUES ( NULL , '$firstname', '$lastname', '$address', '$city', '$country')";       
         $result = mysqli_query($dbConn, $sql);
 
-        if($result){
-            echo '<script> alert("Data saved."); </script>';
+        if(mysqli_query($dbConn,$query)){
+            echo "<script>alert('Records inserted successfully.')</script>";
             header('Location: ./index.php');
-        }else{
-            echo '<script> alert("Data Not saved."); </script>';
+        } else{
+            echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
         }
+       
     }
 ?>
