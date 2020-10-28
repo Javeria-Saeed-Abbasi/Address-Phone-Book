@@ -23,7 +23,7 @@
                     <li> <a href="./#contact-list">Contacts</a> </li>
                     <li> <a href="./profile.php">User Profile</a> </li>
                     <li> <a href="./about.php">About</a> </li>
-                    <li> <a href="./allcontacts.php">View All Contact</a> </li>
+                    <!-- <li> <a href="./allcontacts.php">View All Contact</a> </li> -->
                     <li> <a href="./contactus.php">Contact Us</a> </li>
                     
                 </ul>

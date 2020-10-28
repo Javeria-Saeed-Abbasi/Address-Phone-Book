@@ -41,24 +41,25 @@ session_start();
 </head>
 <body>
 <?php
-// $username = "";
-// $email = "";
- if(isset($_POST['addUser']))
+$username = "";
+$email = "";
+ if(isset($_POST['updateRequest']))
  {
+      $id = $_POST['updateId'];
       // $profilepic = $_POST['profileavatar'];
-      $username = $_POST['username'];
-      $email = $_POST['email'];
-      $password = $_POST['password'];
-      $phone= $_POST['phone'];
-      $city= $_POST['city'];
-      $country= $_POST['country'];
-      $address= $_POST['address'];
-      $sec_ques = $_POST['sec_question'];
-      $sec_answ = $_POST['sec_answer'];
+      $username = $_POST['updateUsername'];
+      $email = $_POST['updateEmail'];
+      $password = $_POST['updatePassword'];
+      $phone= $_POST['updatePhone'];
+      $city= $_POST['updateCity'];
+      $country= $_POST['updateCountry'];
+      $address= $_POST['updateAddress'];
+      $sec_ques = $_POST['updateSec_question'];
+      $sec_answ = $_POST['updateSec_answer'];
 
       //For Authentication of unique Username and Email:
-    $query_username = " SELECT * FROM `registered_users` WHERE username ='$username'";
-    $query_email = " SELECT * FROM `registered_users` WHERE email ='$email'";
+    $query_username = " SELECT * FROM `registered_users` WHERE username ='.$username.'";
+    $query_email = " SELECT * FROM `registered_users` WHERE email ='.$email.'";
     $res_u = mysqli_query($dbConn,  $query_username);
     $res_e = mysqli_query($dbConn, $query_email);
     
@@ -67,10 +68,11 @@ session_start();
   	}else if(mysqli_num_rows($res_e) > 0){
   	  $email_error = "Sorry... email already taken"; 	
   	}else{
-      $query = "INSERT INTO `registered_users` (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_ques`,`sec_ans`,`date`) VALUES (NULL, '$profilepic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
+      $query = "UPDATE `requests` SET `username`='.$username.',`email`='.$email.',`password`='.$password.',`phone`='.$phone.',`city`='.$city.',`country`='.$country.',`address`='.$address.',`sec_question`='.$sec_ques.',`sec_answer`='.$sec_answ.', WHERE `id` ='.$id.' ;";
+// (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_ques`,`sec_ans`,`date`) VALUES (NULL, '$profilepic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
            $results = mysqli_query($dbConn, $query);
            if(mysqli_query($dbConn,$query)){
-            echo "<script>alert('Records inserted successfully.')</script>";
+            echo "<script>alert('Data Updated successfully.')</script>";
         } else{
             echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
         }
@@ -106,7 +108,7 @@ include('includes/navbar.php');
               <br/><br/> 
           <h3 class=" mb-3 font-weight-normal">Update Request</h3>
           </div>
-          <form class="md-form" action="adduser.php" method="post" enctype="multipart/form-data">
+          <form class="md-form" action="update-request.php" method="POST" enctype="multipart/form-data">
           <center>
           <div class="file-field">
     <div class="mb-2">
@@ -124,7 +126,7 @@ include('includes/navbar.php');
   <div id="error_msg" <?php if (isset($name_error)): ?> class="form_error" <?php endif ?> >
 	  <div class="form-group">
     <label for="inputUsername" >Username</label>
-    <input type="text" name="username" value="<?php echo $username; ?>" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required>  
+    <input type="text" name="updateUsername" value="<?php echo $username; ?>" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required>  
 	  <?php if (isset($name_error)): ?>
 	  	<span><?php echo $name_error; ?></span>
 	  <?php endif ?>
@@ -139,7 +141,7 @@ include('includes/navbar.php');
     <div id="error_msg" <?php if (isset($email_error)): ?> class="form_error" <?php endif ?> >
 	  <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
-    <input type="email" name="email" value="<?php echo $email; ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+    <input type="email" name="updateEmail" value="<?php echo $email; ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
 	  <?php if (isset($email_error)): ?>
 	  	<span><?php echo $email_error; ?></span>
 	  <?php endif ?>
@@ -152,29 +154,29 @@ include('includes/navbar.php');
   </div> -->
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <input type="password" name="updatePassword" class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
   <div class="form-group ">
   <label for="form_phone" class=" col-form-label">Phone</label>
-    <input class="form-control" name="phone" type="tel" placeholder="+92-12345678" id="form_phone">
+    <input class="form-control" name="updatePhone" type="tel" placeholder="+92-12345678" id="form_phone">
 </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">City</label>
-      <input type="text"  name="city"  class="form-control" id="inputCity" placeholder="Karachi">
+      <input type="text"  name="updateCity"  class="form-control" id="inputCity" placeholder="Karachi">
     </div>
     <div class="form-group col-md-6">
       <label for="inputCountry">Country</label>
-      <input type="text"  name="country" class="form-control" id="inputCountry" placeholder="Pakistan">
+      <input type="text"  name="updateCountry" class="form-control" id="inputCountry" placeholder="Pakistan">
     </div>
     </div>
   <div class="form-group">
     <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" name="address" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" class="form-control" name="updateAddress" id="inputAddress" placeholder="1234 Main St">
   </div>
  <div class="form-group">
       <label>Secret Question</label>
-      <select class="form-control" name="sec_question" required>
+      <select class="form-control" name="updateSec_question" required>
         <option selected>Choose...</option>
         <option>What is your pet name?</option>
         <option>Which is your favourite movie?</option>
@@ -183,10 +185,10 @@ include('includes/navbar.php');
     </div>
     <div class="form-group">
     <label for="inputtext">Secret Answer</label>
-    <input type="text" name="sec_answer" class="form-control" id="inputtext" placeholder="Shahid Afridi">
+    <input type="text" name="updateSec_answer" class="form-control" id="inputtext" placeholder="Shahid Afridi">
   </div>
 <center>
-  <button type="submit" name="addUser" class="btn btn-primary" >UPDATE</button>
+  <button type="submit" name="updateRequest" class="btn btn-primary" >UPDATE</button>
   <br/><br/>
  </center>
         </form>
@@ -199,5 +201,30 @@ include('includes/navbar.php');
     include('includes/footer.php');
         ?>
 </body>
+<script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+<script>
+    $(document).ready(function () {
+      $('.updateBtn').on('click', function(){
+        // Get the table row data.
+        $tr = $(this).closest('tr');
+
+        var data = $tr.children("td").map(function() {
+            return $(this).text();
+        }).get();
+
+        console.log(data);
+
+        $('#updateId').val(data[0]);
+        $('#updateFirstname').val(data[1]);
+        $('#updateLastname').val(data[2]);
+        $('#updateAddress').val(data[3]);
+        $('#updateSkills').val(data[4]);
+        $('#updateDesignation').val(data[5]);      
+
+        });
+        
+    });
+  </script>
+
 <script src="js/script.js"></script>
 </html>

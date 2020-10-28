@@ -53,11 +53,12 @@ $result = mysqli_query ($dbConn , $query);
 if (mysqli_num_rows($result) ==1) {
   $_SESSION ['message'] = "You are logged in";
   $_SESSION ['username'] = $username ;
-  header("location:./index.php");
+  header("location:../index.php");
   // echo "next page";
 }
 else{
-  $_SESSION ['message'] = "query unscusssesful" . $dbConn->error;
+  echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
+  // $_SESSION ['message'] = "query unscusssesful" . $dbConn->error;
 }
 // else { "query unsucessful". $dbConn->error;
 

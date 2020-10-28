@@ -1,6 +1,6 @@
 <?php
  require_once('../../db/config.php'); 
-session_start();
+// session_start();
 ?>
 <?php
 // $_SESSION['user-id'] = $userID;
@@ -17,16 +17,15 @@ session_start();
       $city= $_POST['city'];
       $country= $_POST['country'];
       
-      
-
-        $sql = " INSERT INTO `users_contact` (`id`, `user-id`, `first-name`, `lastname`, email`, `phone`, `address`, `city` , `country`) VALUES ( NULL , '$firstname', '$lastname', '$address', '$city', '$country')";       
-        $result = mysqli_query($dbConn, $sql);
+      $query = "INSERT INTO `users_contact` (`id`, `user-id`, `first-name`, `last-name`, `email`, `phone`, `address`, `city`, `country`) VALUES (NULL, '', '$firstname', '$lastname', '$email', '$phone',  '$address', '$city', '$country')";
+        // $query = "INSERT INTO `users_contact` (`id`, `user-id`, `first-name`, `last-name`, email`, `phone`, `address`, `city` , `country`) VALUES ( NULL , '$firstname', '$lastname', '$address', '$city', '$country')";       
+        $result = mysqli_query($dbConn, $query);
 
         if(mysqli_query($dbConn,$query)){
-            echo "<script>alert('Records inserted successfully.')</script>";
-            header('Location: ./index.php');
+            echo "<script>alert('Records inserted successfully. ')</script>";
+            header('Location: ../index.php');
         } else{
-            echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
+            echo "  ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
         }
        
     }

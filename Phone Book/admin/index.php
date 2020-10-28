@@ -1,9 +1,12 @@
 <?php
    session_start(); //we need session for the log in thingy XD 
-// include('../db/config.php');
-//     if($_SESSION['login']!==true){
-//         header('location:login/login.php');
-//     }
+include('../db/config.php');
+    // if($_SESSION['login']!==true){
+    //     header('location:login/login.php');
+    // }
+    // else{
+    //     header('location:index.php');
+    // }
 
 ?>
 <!DOCTYPE html>
@@ -26,6 +29,18 @@
     background-color:#3488fc;
     color:#fff;
 }
+.dt-buttons{
+    display: flex;
+    justify-content: center;
+}
+.dt-button{
+    border:transparent;
+    color:white;
+    border-radius:30%;
+    padding:5px 10px 5px 10px;
+    margin: 2px;
+    background-color: #2c964c;
+}
 </style>
 </head>
 <body>
@@ -42,8 +57,11 @@ include('includes/sidewrapper.php');
         <!-- ================ Content Div ==================== -->
         <div class="col-8 col-md-10 col-lg-10 pt-2 bg-light overflow-auto" style="max-height:460px;">
                     <div class="container jumbotron bg-primary shadow-lg w-100" >
+                    <div class="container" id="users-list">
+                    <h1 class="text-center">USERS LIST</h1>
+                    </div>
                     <!-- Search bar -->
-                        <form class="form-inline my-2 my-lg-0">
+                        <!-- <form class="form-inline my-2 my-lg-0">
                         <div class="input-group w-50 mx-auto">
                             <input type="search" class="form-control" placeholder="Search" aria-label="Search">
                             <div class="input-group-append">
@@ -52,7 +70,7 @@ include('includes/sidewrapper.php');
                             </button>
                             </div>
                         </div>
-                        </form>
+                        </form> -->
                 <!-- //Search bar ends-->
                     
                     <!-- Buttons -->
@@ -62,13 +80,13 @@ include('includes/sidewrapper.php');
                     <div class="btn-group pt-5  my-2 my-lg-0 ">
                     <a class="btn btn-light" href="adduser.php" role="button">Add New User</a>
                     &nbsp;&nbsp;&nbsp;
-                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <!-- <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
                     </button>
                     <div class="dropdown-menu" id="download-btn">
                         <a class="dropdown-item text-center" href="#">.CSV</a>
                         <a class="dropdown-item text-center" href="#">.XSL</a>
-                    </div>
+                    </div> -->
                    
                     <!-- //button group div -->
                     </div>
@@ -80,12 +98,10 @@ include('includes/sidewrapper.php');
 </div>
               <!-- //jumbotorn ends div -->
                     </div>
-                    <div class="container" id="users-list">
-                    <h3 class="text-center">USERS LIST</h3>
-                    </div>
+                    
                     <!-- contact table -->
                     <div class="container shadow-lg pt-5 pb-5">
-                    <table class="table table-striped table-responsive-sm">
+                    <table class="table table-striped table-responsive-sm" id="users-data">
                     <thead class="bg-primary text-white">
                         <tr>
                         <th scope="col">#</th>
@@ -102,14 +118,21 @@ include('includes/sidewrapper.php');
                         </tr>
                     </thead>
                     <tbody>
+                    <?php
+                        $query = "SELECT * FROM `registered_users`;";
+                        $result = mysqli_query($dbConn,$query);
+                        if ($result->num_rows > 0) {
+                        while($rows= mysqli_fetch_array($result)){
+
+                        ?>
                         <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                        <th scope="row"><?php echo $rows['id']; ?></th>
+                        <td><?php echo $rows['username']; ?></td>
+                        <td><?php echo $rows['email']; ?></td>
+                        <td><?php echo $rows['phone']; ?></td>
+                        <td><?php echo $rows['address']; ?></td>
+                        <td><?php echo $rows['city']; ?></td>
+                        <td><?php echo $rows['country']; ?></td>
                         <td align="center">
 							<a href="#" class="text-primary"><i class="fa fa-fw fa-eye"></i>View</a>
 						</td>
@@ -119,20 +142,24 @@ include('includes/sidewrapper.php');
                         </td>
                         
                         </tr>
-                        <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                        </tr>
+                        <?php
+                        }
+                    }
+                        ?>
                     </tbody>
                     </table>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.jqueryui.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
+ <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+ <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+ <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+ <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+ <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+   
                     </div>
                     
               
@@ -144,4 +171,15 @@ include('includes/sidewrapper.php');
 include('includes/footer.php');
 ?>
 </body>
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $('#users-data').DataTable({
+       dom: 'Bfrtip',
+      buttons: [
+        'copy', 'excel','csv','pdf'
+    ]
+    });
+
+});
+</script>
 </html>

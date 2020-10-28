@@ -50,8 +50,11 @@ include('includes/sidewrapper.php');
         <!-- ================ Content Div ==================== -->
         <div class="col-8 col-md-10 col-lg-10 pt-2 bg-light overflow-auto" style="max-height:460px;">
                     <div class="container jumbotron bg-primary shadow-lg w-100" >
+                    <div class="container" id="users-list">
+                    <h1 class="text-center">User Requests</h1>
+                    </div>
                     <!-- Search bar -->
-                        <form class="form-inline my-2 my-lg-0">
+                        <!-- <form class="form-inline my-2 my-lg-0">
                         <div class="input-group w-50 mx-auto">
                             <input type="search" class="form-control" placeholder="Search" aria-label="Search">
                             <div class="input-group-append">
@@ -60,7 +63,7 @@ include('includes/sidewrapper.php');
                             </button>
                             </div>
                         </div>
-                        </form>
+                        </form> -->
                 <!-- //Search bar ends-->
                     <br/><br/>
                     <!-- Buttons -->
@@ -70,14 +73,14 @@ include('includes/sidewrapper.php');
                     <div class="btn-group   my-2 my-lg-0 ">
                     <!-- <a class="btn btn-light" href="newcontact.php" role="button">Add New User</a> -->
                     <!-- &nbsp;&nbsp;&nbsp; -->
-                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <!-- <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
                     </button>
                     <div class="dropdown-menu" id="download-btn">
                         <a class="dropdown-item text-center" href="#">.CSV</a>
                         <a class="dropdown-item text-center" href="#">.XSL</a>
                     </div>
-                   
+                    -->
                     <!-- //button group div -->
                     </div>                    
                     <a class="btn btn-danger" href="#" role="button"><i class="fa fa-trash"></i>  Delete All</a>
@@ -86,11 +89,11 @@ include('includes/sidewrapper.php');
 </div>
               <!-- //jumbotorn ends div -->
                     </div>
-                    <div class="container" id="users-list">
+                    <!-- <div class="container" id="users-list">
                     <h3 class="text-center">User Requests</h3>
-                    </div>
+                    </div> -->
                     <!-- Requests contact table -->
-                    <div class="container shadow-lg pt-5 pb-5 bg-warning overflow-auto">
+                    <div id="users-list" class="container shadow-lg pt-5 pb-5 bg-warning overflow-auto">
                     <table class="table table-striped table-responsive-sm w-auto" id="contacts-data">
                     <thead class="bg-primary text-white">
                         <tr>
@@ -134,7 +137,7 @@ include('includes/sidewrapper.php');
                         <td><a href="" class="btn btn-danger my-2">Reject</a></td>
                         
                         <td align="center">
-							<a href="update-request.php" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
+							<a href="update-request.php"  class="text-primary updateBtn"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
 							<a href="delete-request.php" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
                         </td>
                         

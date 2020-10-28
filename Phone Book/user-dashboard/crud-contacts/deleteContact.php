@@ -1,11 +1,10 @@
 <?php
 require('../db/config.php');
-session_start();
-
-$id  = $_SESSION["id"] ; 
+// session_start();
+// $id  = $_SESSION["id"] ; 
 // $id = $_GET['id'];
-// sql to delete a record
-$query = " DELETE FROM `requests` WHERE `requests`.`id` = '$id';";
+
+$query = " DELETE FROM `users_contact` WHERE `users_contact`.`id` = '$id';";
 
 $results = mysqli_query($dbConn, $query);
 if(mysqli_query($dbConn,$query)){
