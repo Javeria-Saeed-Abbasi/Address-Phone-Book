@@ -92,7 +92,7 @@ include('includes/sidewrapper.php');
                     </div>
                     <br/>
                     
-                    <a class="btn btn-danger mt-3" href="#" role="button"><i class="fa fa-trash"></i>  Delete All</a>
+                    <a class="btn btn-danger mt-3" href="deleteAll-users.php" role="button"><i class="fa fa-trash"></i>  Delete All</a>
                     </center>
 
 </div>
@@ -138,7 +138,7 @@ include('includes/sidewrapper.php');
 						</td>
                         <td align="center">
 							<a href="editcontact.php" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
-							<a href="#" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
+							<a href="deleteUser.php?id=<?php echo $rows['id'] ?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
                         </td>
                         
                         </tr>

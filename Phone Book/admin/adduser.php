@@ -67,7 +67,7 @@ $email = "";
   	}else if(mysqli_num_rows($res_e) > 0){
   	  $email_error = "Sorry... email already taken"; 	
   	}else{
-      $query = "INSERT INTO `registered_users` (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_ques`,`sec_ans`,`date`) VALUES (NULL, '$profilepic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
+      $query = "INSERT INTO `registered_users` (`id`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_ques`,`sec_ans`,`date`) VALUES (NULL,  '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
            $results = mysqli_query($dbConn, $query);
            if(mysqli_query($dbConn,$query)){
             echo "<script>alert('Records inserted successfully.')</script>";
@@ -77,6 +77,7 @@ $email = "";
         exit();
     }
   }
+
 ?>
 
 <?php

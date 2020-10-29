@@ -138,7 +138,7 @@ include('includes/sidewrapper.php');
                         
                         <td align="center">
 							<a href="update-request.php"  class="text-primary updateBtn"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
-							<a href="delete-request.php" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
+						    <a href="delete-request.php?id=<?php echo $rows['id'] ?>" name="deleteRequest" class="text-danger" onClick="return confirm('Are you sure to delete this user Request?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
                         </td>
                         
                         </tr>
