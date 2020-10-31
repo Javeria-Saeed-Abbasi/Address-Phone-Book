@@ -11,7 +11,8 @@ $result = mysqli_query($dbConn, $query);
 
 if(mysqli_query($dbConn, $query)){
  echo "<script>alert('Record deleted successfully.')</script>";
- header("location:index.php");
+ header("location:requests.php");
+// echo    "Back to index";
 } else{
  echo "ERROR: Could not able to execute $query. " . $dbConn->error;
 }

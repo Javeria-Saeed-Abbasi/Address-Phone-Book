@@ -1,12 +1,10 @@
 <?php
-   session_start(); //we need session for the log in thingy XD 
 include('../db/config.php');
-    // if($_SESSION['login']!==true){
-    //     header('location:login/login.php');
-    // }
-    // else{
-    //     header('location:index.php');
-    // }
+   session_start(); //we need session for the log in thingy XD 
+    if(empty($_SESSION['username'])){
+        header('location:login/login.php');
+    }
+   
 
 ?>
 <!DOCTYPE html>
@@ -57,7 +55,7 @@ include('includes/sidewrapper.php');
         <!-- ================ Content Div ==================== -->
         <div class="col-8 col-md-10 col-lg-10 pt-2 bg-light overflow-auto" style="max-height:460px;">
                     <div class="container jumbotron bg-primary shadow-lg w-100" >
-                    <div class="container" id="users-list">
+                    <div class="container" >
                     <h1 class="text-center">USERS LIST</h1>
                     </div>
                     <!-- Search bar -->
@@ -100,7 +98,7 @@ include('includes/sidewrapper.php');
                     </div>
                     
                     <!-- contact table -->
-                    <div class="container shadow-lg pt-5 pb-5">
+                    <div id="users-list" class="container shadow-lg pt-5 pb-5">
                     <table class="table table-striped table-responsive-sm" id="users-data">
                     <thead class="bg-primary text-white">
                         <tr>
@@ -111,6 +109,8 @@ include('includes/sidewrapper.php');
                         <th scope="col">Address</th>
                         <th scope="col">City</th>
                         <th scope="col">Country</th>
+                        <th scope="col">Secret Ques</th>
+                        <th scope="col">Secret Answ</th>
                         <th scope="col">Contacts</th>
                         <th scope="col">Action</th>
                         
@@ -119,6 +119,7 @@ include('includes/sidewrapper.php');
                     </thead>
                     <tbody>
                     <?php
+                        $count= 1;
                         $query = "SELECT * FROM `registered_users`;";
                         $result = mysqli_query($dbConn,$query);
                         if ($result->num_rows > 0) {
@@ -126,25 +127,30 @@ include('includes/sidewrapper.php');
 
                         ?>
                         <tr>
-                        <th scope="row"><?php echo $rows['id']; ?></th>
+                        <th scope="row"><?php echo $count;?></th>
+                        <!-- <th scope="row"><?php echo $rows['id']; ?></th> -->
                         <td><?php echo $rows['username']; ?></td>
                         <td><?php echo $rows['email']; ?></td>
                         <td><?php echo $rows['phone']; ?></td>
                         <td><?php echo $rows['address']; ?></td>
                         <td><?php echo $rows['city']; ?></td>
                         <td><?php echo $rows['country']; ?></td>
+                        <td><?php echo $rows['sec_ques']; ?></td>
+                        <td><?php echo $rows['sec_ans']; ?></td>
+
                         <td align="center">
-							<a href="#" class="text-primary"><i class="fa fa-fw fa-eye"></i>View</a>
+							<a href="viewUserContacts.php" class="text-primary"><i class="fa fa-fw fa-eye"></i>View</a>
 						</td>
                         <td align="center">
-							<a href="editcontact.php" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
+							<a href="updateUser.php?id=<?php echo $rows['id'] ?>" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
 							<a href="deleteUser.php?id=<?php echo $rows['id'] ?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
                         </td>
                         
                         </tr>
                         <?php
+                        $count++;}
+                        
                         }
-                    }
                         ?>
                     </tbody>
                     </table>

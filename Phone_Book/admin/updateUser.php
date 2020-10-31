@@ -14,7 +14,7 @@ session_start();
     <!-- Font Awsome cdn link -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <title>Add User By Admin</title>
+    <title>Update User By Admin</title>
     <style>
         #register-wrapper h2{
             color: #3488fc;
@@ -41,24 +41,24 @@ session_start();
 </head>
 <body>
 <?php
-$username = "";
-$email = "";
- if(isset($_POST['addUser']))
+
+ if(isset($_POST['updateRequest']))
  {
+  $id = $_POST['id'];
       // $profilepic = $_POST['profileavatar'];
-      $username = $_POST['username'];
-      $email = $_POST['email'];
-      $password = $_POST['password'];
-      $phone= $_POST['phone'];
-      $city= $_POST['city'];
-      $country= $_POST['country'];
-      $address= $_POST['address'];
-      $sec_ques = $_POST['sec_question'];
-      $sec_answ = $_POST['sec_answer'];
+      $username = $_POST['updateUsername'];
+      $email = $_POST['updateEmail'];
+      $password = $_POST['updatePassword'];
+      $phone= $_POST['updatePhone'];
+      $city= $_POST['updateCity'];
+      $country= $_POST['updateCountry'];
+      $address= $_POST['updateAddress'];
+      $sec_ques = $_POST['updateSec_question'];
+      $sec_answ = $_POST['updateSec_answer'];
 
       //For Authentication of unique Username and Email:
-    $query_username = " SELECT * FROM `registered_users` WHERE username ='$username'";
-    $query_email = " SELECT * FROM `registered_users` WHERE email ='$email'";
+    $query_username = "SELECT * FROM `registered_users` WHERE username ='.$username.'";
+    $query_email = "SELECT * FROM `registered_users` WHERE email ='.$email.'";
     $res_u = mysqli_query($dbConn,  $query_username);
     $res_e = mysqli_query($dbConn, $query_email);
     
@@ -67,17 +67,18 @@ $email = "";
   	}else if(mysqli_num_rows($res_e) > 0){
   	  $email_error = "Sorry... email already taken"; 	
   	}else{
-      $query = "INSERT INTO `registered_users` (`id`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_ques`,`sec_ans`,`date`) VALUES (NULL,  '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
-           $results = mysqli_query($dbConn, $query);
+      $query = "UPDATE `requests` SET `username`=".$username.",`email`=".$email.",`password`=".$password.",`phone`=".$phone.",`city`= ".$city.",`country`=".$country.",`address`=".$address.",`sec_question`=".$sec_ques.",`sec_answer`=".$sec_answ.", WHERE `id` =".$id."; ";
+// (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_ques`,`sec_ans`,`date`) VALUES (NULL, '$profilepic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
+           $result = mysqli_query($dbConn, $query);
            if(mysqli_query($dbConn,$query)){
-            echo "<script>alert('Records inserted successfully.')</script>";
+            echo "<script>alert('Data Updated successfully.')</script>";
+            header("location:requests.php");
         } else{
             echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
         }
         exit();
     }
   }
-
 ?>
 
 <?php
@@ -102,17 +103,25 @@ include('includes/navbar.php');
             <div class="btn-group w-100" role="group" aria-label="Basic example">
                 <!-- <a class="btn btn-light" href="login.php" role="button">Login</a> -->
                 <!-- <button type="button" class="btn btn-light active">Login</button> -->
-                <a class="btn btn-light active" href="#" role="button">Add User</a>
+                <a class="btn btn-light active" href="#" role="button">Update Request</a>
               </div>        
               <br/><br/> 
-          <h3 class=" mb-3 font-weight-normal">Add User</h3>
+          <h3 class=" mb-3 font-weight-normal">Update User</h3>
           </div>
-          <form class="md-form" action="adduser.php" method="post" enctype="multipart/form-data">
-         <center>
+<?php
+$id = $_GET['id'];
+$query="SELECT * FROM `registered_users` WHERE id=$id";
+$results = mysqli_query($dbConn, $query);
+  while($row=mysqli_fetch_array($results))
+  {
+  ?>
+          <form class="md-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
+          <center>
           <div class="file-field">
     <div class="mb-2">
       <img src="../images/upload img.png" onClick="triggerClick()" id="profileDisplay" class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
     </div>
+ 
     <div class="d-flex justify-content-center">
       <div class="  float-left">
         <!-- <span>Add photo</span> -->
@@ -124,7 +133,7 @@ include('includes/navbar.php');
   <div id="error_msg" <?php if (isset($name_error)): ?> class="form_error" <?php endif ?> >
 	  <div class="form-group">
     <label for="inputUsername" >Username</label>
-    <input type="text" name="username" value="<?php echo $username; ?>" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required>  
+    <input type="text" name="updateUsername" value="<?php echo $row['username']; ?>" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required>  
 	  <?php if (isset($name_error)): ?>
 	  	<span><?php echo $name_error; ?></span>
 	  <?php endif ?>
@@ -139,7 +148,7 @@ include('includes/navbar.php');
     <div id="error_msg" <?php if (isset($email_error)): ?> class="form_error" <?php endif ?> >
 	  <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
-    <input type="email" name="email" value="<?php echo $email; ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+    <input type="email" name="updateEmail" value="<?php echo $row['email']; ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
 	  <?php if (isset($email_error)): ?>
 	  	<span><?php echo $email_error; ?></span>
 	  <?php endif ?>
@@ -152,52 +161,57 @@ include('includes/navbar.php');
   </div> -->
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <input type="text" name="updatePassword" value="<?php echo $row['password']; ?>" class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
   <div class="form-group ">
   <label for="form_phone" class=" col-form-label">Phone</label>
-    <input class="form-control" name="phone" type="tel" placeholder="+92-12345678" id="form_phone">
+    <input class="form-control" name="updatePhone" value="<?php echo $row['phone'];?>" type="tel" placeholder="+92-12345678" id="form_phone">
 </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">City</label>
-      <input type="text"  name="city"  class="form-control" id="inputCity" placeholder="Karachi">
+      <input type="text"  name="updateCity" value="<?php echo $row['city']; ?>" class="form-control" id="inputCity" placeholder="Karachi">
     </div>
     <div class="form-group col-md-6">
       <label for="inputCountry">Country</label>
-      <input type="text"  name="country" class="form-control" id="inputCountry" placeholder="Pakistan">
+      <input type="text"  name="updateCountry" value="<?php echo $row['country']; ?>" class="form-control" id="inputCountry" placeholder="Pakistan">
     </div>
     </div>
   <div class="form-group">
     <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" name="address" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" class="form-control" value="<?php echo $row['address']; ?>" name="updateAddress" id="inputAddress" placeholder="1234 Main St">
   </div>
  <div class="form-group">
       <label>Secret Question</label>
-      <select class="form-control" name="sec_question" required>
-        <option selected>Choose...</option>
-        <option>What is your pet name?</option>
-        <option>Which is your favourite movie?</option>
-        <option>Who is your favourite cricketer?</option>
+      <select class="form-control"   name="updateSec_question" required>
+        <option><?php echo $row['sec_ques'];?></option>
+        <option value="What is your pet name?">What is your pet name?</option>
+        <option value="Which is your favourite movie?" >Which is your favourite movie?</option>
+        <option value="Who is your favourite cricketer?" >Who is your favourite cricketer?</option>
       </select>
     </div>
     <div class="form-group">
     <label for="inputtext">Secret Answer</label>
-    <input type="text" name="sec_answer" class="form-control" id="inputtext" placeholder="Shahid Afridi">
+    <input type="text" value="<?php echo $row['sec_ans']; ?>" name="updateSec_answer" class="form-control" id="inputtext" placeholder="Shahid Afridi">
   </div>
 <center>
-  <button type="submit" name="addUser" class="btn btn-primary">Add</button>
+  <button type="submit" name="updateRequest" value="<?php echo $row['id']; ?>" class="btn btn-primary" >UPDATE</button>
   <br/><br/>
  </center>
+ <?php
+  }
+ ?>
         </form>
       </div>
     </div>
 
     </div> <!------//second col div ends here---------->
+    
         <!-- ================= Footer  =============================== -->
     <?php
     include('includes/footer.php');
         ?>
 </body>
+
 <script src="js/script.js"></script>
 </html>

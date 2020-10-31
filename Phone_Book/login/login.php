@@ -1,8 +1,6 @@
 <?php
-include ('../../db/config.php');
 session_start();
-
-
+require_once ('../db/config.php');
 
 ?>
 <!DOCTYPE html>
@@ -17,7 +15,7 @@ session_start();
     <!-- Font Awsome cdn link -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <title>Login</title> 
+    <title>Login</title>
     <style>
         #login-wrapper h2{
             color: #3488fc;
@@ -46,74 +44,46 @@ if (isset($_POST['signin']))
   $username= $_POST['username'];
   $password= $_POST ['password'];
 
-$query = "SELECT * from `admin` WHERE  username = '".$username."' AND  password ='".$password."' ;";
+$query = "SELECT * from `registered_users` WHERE  username = '".$username."' AND  password ='".$password."' ;";
 // if ($result=$dbConn->query($query)) {}
 $result = mysqli_query ($dbConn , $query);    
 
 if (mysqli_num_rows($result) ==1) {
-  $_SESSION ['message'] = "You are logged in";
-  $_SESSION ['username'] = $username ;
-  header("location:../index.php");
+  $_SESSION['message'] = "You are logged in";
+  $_SESSION['username'] = $username ;
+  header("location:../user-dashboard/index.php");
   // echo "next page";
 }
 else{
-  echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
-  // $_SESSION ['message'] = "query unscusssesful" . $dbConn->error;
+  $_SESSION['message'] = "query unscusssesful" . $dbConn->error;
 }
 // else { "query unsucessful". $dbConn->error;
 
 }
- 
 
-// if (isset($_POST['signin']))
-// {
-//   $username= $_POST['username'];
-//   $password= $_POST ['password'];
 
-// $query = "SELECT * from `admin` WHERE  `username` = '".$username."' AND `password` ='".$password."' ;";
-// // if ($result=$dbConn->query($query)) {}
-// $result =$dbConn->query($query) ;    
-//   if($result->num_rows>0)  
-
-//   {
-
-//      $row = $result->fetch_assoc();
-      
-     
-//       $_SESSION['username'] = $row['username'];
-    
-//       $_SESSION['password'] = $row['password'];
-//        header("Location:./index.php"); 
-//   }
-//   else
-//   {
-
-//      echo "Username/Password is incorrect";
-//   }
-
-// }
-// else { "query unsucessful". $dbConn->error;
-// }
 
 ?>
+
+
     <?php
     include('navbar.php');
     ?>
        <!--=========================== Login Form =======================  -->
        <div class="container mt-3 " id="login-wrapper">
            <center>
-            <img src="../../images/kontact.png" class="img-fluid"/>
+            <img src="../images/kontact.png" class="img-fluid"/>
             <h2 class="mt-3">WELCOME</h2>
         </center>
           
        </div>
        <div class="container border col-5 shadow-lg  p-3 mb-5 bg-white rounded">
     <div class="container pl-0 pr-0" id="login-form">
-        <form action="login.php" method="POST" class="form-signin mx-auto"> 
+        <form method="post" class="form-signin mx-auto"> 
             <div class="btn-group w-100" role="group" aria-label="Basic example">
                 <a class="btn btn-light active" href="login.php" role="button">Login</a>
                 <!-- <button type="button" class="btn btn-light active">Login</button> -->
-                <!-- <a class="btn btn-light" href="register.php" role="button">Sign Up</a> -->
+                <a class="btn btn-light" href="register.php" role="button">Sign Up</a>
               </div>        
               <br/><br/> 
           <h3 class=" mb-3 font-weight-normal text-center">Please sign in</h3>

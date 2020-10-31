@@ -115,6 +115,7 @@ include('includes/sidewrapper.php');
                     </thead>
                     <tbody>
                     <?php
+                        $count= 1;
                         $query = "SELECT * from `requests`;";
                         $result = mysqli_query($dbConn,$query);
                         if ($result->num_rows > 0) {
@@ -122,7 +123,8 @@ include('includes/sidewrapper.php');
 
                         ?>
                         <tr>
-                        <th scope="row"><?php echo $rows['id']; ?></th>
+                        <th scope="row"><?php echo $count;?></th>
+                        <!-- <th scope="row"><?php echo $rows['id']; ?></th> -->
                         <td><?php echo $rows['username']; ?></td>
                         <td><?php echo $rows['email']; ?></td>
                         <td><?php echo $rows['phone']; ?></td>
@@ -137,13 +139,13 @@ include('includes/sidewrapper.php');
                         <td><a href="" class="btn btn-danger my-2">Reject</a></td>
                         
                         <td align="center">
-							<a href="update-request.php"  class="text-primary updateBtn"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
+							<a href="update-request.php?id=<?php echo $rows['id'] ?>" class="text-primary updateBtn"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
 						    <a href="delete-request.php?id=<?php echo $rows['id'] ?>" name="deleteRequest" class="text-danger" onClick="return confirm('Are you sure to delete this user Request?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
                         </td>
                         
                         </tr>
                         <?php
-                        }
+                      $count++;  }
                     }
                         ?>
                     </tbody>

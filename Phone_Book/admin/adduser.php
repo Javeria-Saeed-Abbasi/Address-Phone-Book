@@ -1,5 +1,6 @@
 <?php
 require_once ('../db/config.php');
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +14,7 @@ require_once ('../db/config.php');
     <!-- Font Awsome cdn link -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <title>Register</title>
+    <title>Add User By Admin</title>
     <style>
         #register-wrapper h2{
             color: #3488fc;
@@ -36,18 +37,13 @@ require_once ('../db/config.php');
           color: #3488fc;
           font-weight:bold;
         }
-        #register-form .form-group span{
-          color:red;
-
-        }
     </style>
 </head>
 <body>
-
 <?php
 $username = "";
 $email = "";
- if(isset($_POST['signup']))
+ if(isset($_POST['addUser']))
  {
       // $profilepic = $_POST['profileavatar'];
       $username = $_POST['username'];
@@ -61,8 +57,8 @@ $email = "";
       $sec_answ = $_POST['sec_answer'];
 
       //For Authentication of unique Username and Email:
-    $query_username = " SELECT * FROM requests WHERE username ='$username'";
-    $query_email = " SELECT * FROM requests WHERE email ='$email'";
+    $query_username = " SELECT * FROM `registered_users` WHERE username ='$username'";
+    $query_email = " SELECT * FROM `registered_users` WHERE email ='$email'";
     $res_u = mysqli_query($dbConn,  $query_username);
     $res_e = mysqli_query($dbConn, $query_email);
     
@@ -71,62 +67,29 @@ $email = "";
   	}else if(mysqli_num_rows($res_e) > 0){
   	  $email_error = "Sorry... email already taken"; 	
   	}else{
-      $query = "INSERT INTO `requests` (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_question`,`sec_answer`,`date`) VALUES (NULL, '$profilepic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
+      $query = "INSERT INTO `registered_users` (`id`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_ques`,`sec_ans`,`date`) VALUES (NULL,  '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
            $results = mysqli_query($dbConn, $query);
            if(mysqli_query($dbConn,$query)){
-            echo "<script>alert('Records inserted successfully. Your account reqest is now pending for approval by admin. Please wait for confirmation. Thank you.')</script>";
+            echo "<script>alert('Records inserted successfully.')</script>";
+            header("location:#users-list");
         } else{
             echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
         }
         exit();
-  	}
-      
-  
-  
-    // $query = "INSERT INTO `requests` (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_question`,`sec_answer`,`date`) VALUES (NULL, '$profilepic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
-    
-    
-  //    $result = mysqli_query($dbConn,$query);
-
-  //    if(mysqli_query($dbConn,$query)){
-  //     echo "<script>alert('Records inserted successfully. Your account reqest is now pending for approval by admin. Please wait for confirmation. Thank you.')</script>";
-  // } else{
-  //     echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
-  // }
-   
-  
-  
- }
- 
-//   if($_SERVER["REQUEST_METHOD"] == "POST")
-//   {
- 
-//     $profilePic = $_POST['profileImage'];
-//     $username = $_POST['username'];
-//     $email = $_POST['email'];
-//     $password = $_POST['password'];
-//     $phone= $_POST['phone'];
-//     $city= $_POST['city'];
-//     $country= $_POST['country'];
-//     $address= $_POST['address'];
-//     $sec_ques = $_POST['sec_question'];
-//     $sec_answ = $_POST['sec_answer'];
-
-//     $query = "INSERT INTO `requests` (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_question`,`sec_answer`,`date`) VALUES (NULL,'$profilePic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
-
-// echo $query;      
-//   if ($dbConn->query($query) === TRUE) {
-//     echo "u<script>alert('Your account reqest is now pending for approval by admin. Please wait for confirmation. Thank you.')</script>";
-// } else {
-//     echo "Error: " . $query . "<br>" . $dbConn->error;
-// }
-// }
+    }
+  }
 
 ?>
+
 <?php
-include('navbar.php');
+include('includes/navbar.php');
 ?>
+<!-- =============== Side Bar wrapper =================== -->
+<?php
+    include('includes/sidewrapper.php');
+    ?> 
        <!--=========================== Login Form =======================  -->
+       <div class="col-8 col-md-10 col-lg-10 pt-2 bg-light overflow-auto" style="max-height:460px;">
        <div class="container mt-3 " id="register-wrapper">
            <center>
             <img src="../images/kontact.png" class="img-fluid"/>
@@ -134,20 +97,20 @@ include('navbar.php');
         </center>
           
        </div>
-       <center>
        <div class="container border col-5 shadow-lg  p-3 mb-5 bg-white rounded">
     <div class="container pl-0 pr-0" id="register-form">
-        <div  class="container mx-auto text-center"> 
+        <div class=" mx-auto text-center"> 
             <div class="btn-group w-100" role="group" aria-label="Basic example">
-                <a class="btn btn-light" href="login.php" role="button">Login</a>
+                <!-- <a class="btn btn-light" href="login.php" role="button">Login</a> -->
                 <!-- <button type="button" class="btn btn-light active">Login</button> -->
-                <a class="btn btn-light active" href="register.php" role="button">Sign Up</a>
+                <a class="btn btn-light active" href="#" role="button">Add User</a>
               </div>        
               <br/><br/> 
-          <h3 class=" mb-3 font-weight-normal">Sign Up</h3>
-         </div>
-          <form class="md-form" action="register.php" method="post" enctype="multipart/form-data">
-  <div class="file-field">
+          <h3 class=" mb-3 font-weight-normal">Add User</h3>
+          </div>
+          <form class="md-form" action="adduser.php" method="post" enctype="multipart/form-data">
+         <center>
+          <div class="file-field">
     <div class="mb-2">
       <img src="../images/upload img.png" onClick="triggerClick()" id="profileDisplay" class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
     </div>
@@ -158,7 +121,7 @@ include('navbar.php');
       </div>
     </div>
   </div>
-
+  </center>
   <div id="error_msg" <?php if (isset($name_error)): ?> class="form_error" <?php endif ?> >
 	  <div class="form-group">
     <label for="inputUsername" >Username</label>
@@ -190,27 +153,27 @@ include('navbar.php');
   </div> -->
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+    <input type="password" name="password" required class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
   <div class="form-group ">
   <label for="form_phone" class=" col-form-label">Phone</label>
-    <input class="form-control" name="phone" type="tel" placeholder="+92-12345678" id="form_phone" required> 
+    <input class="form-control" name="phone" required type="tel" placeholder="+92-12345678" id="form_phone">
 </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">City</label>
-      <input type="text" class="form-control" name="city"  id="inputCity" placeholder="Karachi" required>
+      <input type="text"  name="city"  required class="form-control" id="inputCity" placeholder="Karachi">
     </div>
     <div class="form-group col-md-6">
       <label for="inputCountry">Country</label>
-      <input type="text" class="form-control" name="country" id="inputCountry" placeholder="Pakistan" required>
+      <input type="text"  name="country" required class="form-control" id="inputCountry" placeholder="Pakistan">
     </div>
     </div>
   <div class="form-group">
     <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" name="address" id="inputAddress" placeholder="1234 Main St" required>
+    <input type="text" class="form-control" required name="address" id="inputAddress" placeholder="1234 Main St">
   </div>
-  <div class="form-group">
+ <div class="form-group">
       <label>Secret Question</label>
       <select class="form-control" name="sec_question" required>
         <option selected>Choose...</option>
@@ -221,19 +184,20 @@ include('navbar.php');
     </div>
     <div class="form-group">
     <label for="inputtext">Secret Answer</label>
-    <input type="text" name="sec_answer" class="form-control" id="inputtext" placeholder="Shahid Afridi" required>
+    <input type="text" name="sec_answer" class="form-control" id="inputtext" placeholder="Shahid Afridi">
   </div>
-  </center>
 <center>
-  <button type="submit" name="signup" class="btn btn-primary">Sign Up</button>
+  <button type="submit" name="addUser" class="btn btn-primary">Add</button>
   <br/><br/>
  </center>
         </form>
       </div>
     </div>
-    <!-- ================= Footer  =============================== -->
+
+    </div> <!------//second col div ends here---------->
+        <!-- ================= Footer  =============================== -->
     <?php
-    include('loginfooter.php');
+    include('includes/footer.php');
         ?>
 </body>
 <script src="js/script.js"></script>

@@ -5,9 +5,9 @@ session_start();
 // header("Location:.../login/login.php");
 // echo " Helo World" ;
 
-if(isset($_POST['logout'])){
+if(isset($_GET['logout'])){
     session_destroy();
-    header('location:login/login.php');
+    header('location:../../login/login.php');
 }
 
 

@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2020 at 09:24 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.33
+-- Generation Time: Oct 30, 2020 at 02:55 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -20,6 +21,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `phone-book`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`) VALUES
+(1, 'admin1', '123');
 
 -- --------------------------------------------------------
 
@@ -91,6 +111,13 @@ CREATE TABLE `registered_users` (
   `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `registered_users`
+--
+
+INSERT INTO `registered_users` (`id`, `profile_pic`, `username`, `email`, `password`, `phone`, `city`, `country`, `address`, `sec_ques`, `sec_ans`, `date`, `status`) VALUES
+(2, '', 'userbyadmin', 'user@gmail.com', '123', ' 1234', 'lahore', 'pak', '12345', 'What is your pet name?', 'jack', '2020-10-29 10:18:47', '');
+
 -- --------------------------------------------------------
 
 --
@@ -118,12 +145,42 @@ CREATE TABLE `requests` (
 --
 
 INSERT INTO `requests` (`id`, `profile_pic`, `username`, `email`, `password`, `phone`, `city`, `country`, `address`, `sec_question`, `sec_answer`, `date`, `status`) VALUES
-(1, '', 'jiya', 'j@gmail.com', 'kkk', 0, 'kkk', 'kkkk', 'kkkk', 'What is your pet name?', 'kkkk', '2020-09-19 21:18:52', 'created'),
-(11, '', 'jiya', 'j@gmail.com', 'kkk', 0, 'kkk', 'kkkk', 'kkkk', 'What is your pet name?', 'kkkk', '2020-09-19 22:12:23', 'created');
+(1, '', 'jiya', 'j@gmail.com', 'kkk', 0, 'kkk', 'kkkk', 'kkkk', 'What is your pet name?', 'kkkk', '2020-09-19 21:18:52', 'created');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_contact`
+--
+
+CREATE TABLE `users_contact` (
+  `id` int(11) NOT NULL,
+  `user-id` int(11) NOT NULL,
+  `first-name` varchar(255) NOT NULL,
+  `last-name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users_contact`
+--
+
+INSERT INTO `users_contact` (`id`, `user-id`, `first-name`, `last-name`, `email`, `phone`, `address`, `city`, `country`) VALUES
+(3, 0, 'democontact', 'by admin', 'democontact@gmail.com', '123', '1234', 'kar', 'pak');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `contact_us`
@@ -150,8 +207,20 @@ ALTER TABLE `requests`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `users_contact`
+--
+ALTER TABLE `users_contact`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `contact_us`
@@ -169,13 +238,19 @@ ALTER TABLE `feed_back`
 -- AUTO_INCREMENT for table `registered_users`
 --
 ALTER TABLE `registered_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `users_contact`
+--
+ALTER TABLE `users_contact`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

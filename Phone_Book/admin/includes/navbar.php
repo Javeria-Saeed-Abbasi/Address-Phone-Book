@@ -19,7 +19,7 @@
                         <!-- <a href="#" class="dropdown-item">Reports</a>
                         <a href="#" class="dropdown-item">Settings</a>
                         <div class="dropdown-divider"></div> -->
-                        <a href="logout.php"class="dropdown-item">Logout</a>
+                        <a href="includes/logout.php?logout=true"class="dropdown-item">Logout</a>
                     </div>
                 </li>
            </ul>
