@@ -134,7 +134,7 @@ include('includes/sidewrapper.php');
                         <td><?php echo $rows['city']; ?></td>
                         <td><?php echo $rows['country']; ?></td>
                         <td align="center">
-							<a href="editcontact.php" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
+							<a href="editcontact.php?id=<?php echo $rows['id'] ?>" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
 							<a href="crud-contacts/deleteContact.php?id=<?php echo $rows['id'] ?>" class="text-danger" onClick="return confirm('Are you sure to delete this contact?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
 						</td>
                         </tr>

@@ -1,11 +1,10 @@
 <?php
-include('../db/config.php');
-   session_start(); //we need session for the log in thingy XD 
-    if(empty($_SESSION['username'])){
-        header('location:login/login.php');
-    }
-   
+require('../db/config.php');
+session_start();
 
+if(empty($_SESSION['username'])){
+  header('location:login/login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,11 +20,11 @@ include('../db/config.php');
 
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>Admin Dashboard</title>
+    <title>Aceepted Request Page</title>
 <style>
 #download-btn a:hover{
     background-color:#3488fc;
-    color:#fff;
+    color:#fff; 
 }
 .dt-buttons{
     display: flex;
@@ -55,8 +54,8 @@ include('includes/sidewrapper.php');
         <!-- ================ Content Div ==================== -->
         <div class="col-8 col-md-10 col-lg-10 pt-2 bg-light overflow-auto" style="max-height:460px;">
                     <div class="container jumbotron bg-primary shadow-lg w-100" >
-                    <div class="container" >
-                    <h1 class="text-center">USERS LIST</h1>
+                    <div class="container" id="users-list">
+                    <h1 class="text-center">Accepted User Requests</h1>
                     </div>
                     <!-- Search bar -->
                         <!-- <form class="form-inline my-2 my-lg-0">
@@ -70,36 +69,39 @@ include('includes/sidewrapper.php');
                         </div>
                         </form> -->
                 <!-- //Search bar ends-->
-                    
+                    <br/><br/>
                     <!-- Buttons -->
                    
                     <div class="container">
                     <center>
-                    <div class="btn-group pt-5  my-2 my-lg-0 ">
-                    <a class="btn btn-light" href="adduser.php" role="button">Add New User</a>
-                    &nbsp;&nbsp;&nbsp;
+                    <div class="btn-group   my-2 my-lg-0 ">
+                    <!-- <a class="btn btn-light" href="newcontact.php" role="button">Add New User</a> -->
+                    <!-- &nbsp;&nbsp;&nbsp; -->
                     <!-- <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
                     </button>
                     <div class="dropdown-menu" id="download-btn">
                         <a class="dropdown-item text-center" href="#">.CSV</a>
                         <a class="dropdown-item text-center" href="#">.XSL</a>
-                    </div> -->
-                   
-                    <!-- //button group div -->
                     </div>
-                    <br/>
-                    
-                    <a class="btn btn-danger mt-3" href="deleteAll-users.php" role="button"><i class="fa fa-trash"></i>  Delete All</a>
+                    -->
+                    <!-- //button group div -->
+                    </div>                    
+                    <a class="btn btn-danger" href="#" role="button"><i class="fa fa-trash"></i>  Delete All</a>
+                    <a href="acceptedRequest.php" class="btn btn-success my-2">Accepted Request</a>
+                    <a href="rejectedRequest.php"  class="btn btn-danger my-2">Rejected Request</a>
                     </center>
+                    
 
 </div>
               <!-- //jumbotorn ends div -->
                     </div>
-                    
-                    <!-- contact table -->
-                    <div id="users-list" class="container shadow-lg pt-5 pb-5">
-                    <table class="table table-striped table-responsive-sm" id="users-data">
+                    <!-- <div class="container" id="users-list">
+                    <h3 class="text-center">User Requests</h3>
+                    </div> -->
+                    <!-- Requests contact table -->
+                    <div id="users-list" class="container shadow-lg pt-5 pb-5 bg-warning overflow-auto">
+                    <table class="table table-striped table-responsive-sm w-auto" id="accepted">
                     <thead class="bg-primary text-white">
                         <tr>
                         <th scope="col">#</th>
@@ -109,9 +111,8 @@ include('includes/sidewrapper.php');
                         <th scope="col">Address</th>
                         <th scope="col">City</th>
                         <th scope="col">Country</th>
-                        <th scope="col">Secret Ques</th>
-                        <th scope="col">Secret Answ</th>
-                        <th scope="col">Contacts</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                         
                         
@@ -120,10 +121,14 @@ include('includes/sidewrapper.php');
                     <tbody>
                     <?php
                         $count= 1;
-                        $query = "SELECT * FROM `registered_users`;";
+                        $query = "SELECT * from `requests`;";
                         $result = mysqli_query($dbConn,$query);
                         if ($result->num_rows > 0) {
+
                         while($rows= mysqli_fetch_array($result)){
+                            if($rows['status'] == 'accepted'){
+
+                            
 
                         ?>
                         <tr>
@@ -132,31 +137,31 @@ include('includes/sidewrapper.php');
                         <td><?php echo $rows['username']; ?></td>
                         <td><?php echo $rows['email']; ?></td>
                         <td><?php echo $rows['phone']; ?></td>
-                        <td><?php echo $rows['address']; ?></td>
                         <td><?php echo $rows['city']; ?></td>
                         <td><?php echo $rows['country']; ?></td>
-                        <td><?php echo $rows['sec_ques']; ?></td>
-                        <td><?php echo $rows['sec_ans']; ?></td>
-
+                        <td><?php echo $rows['address']; ?></td>
+                        <td><small><i><date><?php echo $rows['date']; ?></date></i></small></td>
+                        <td><button class="btn btn-success my-2"><?php echo $rows['status']?></button></td>                        
                         <td align="center">
-							<a href="viewUserContacts.php?id=<?php echo $rows['id'] ?>" id=<?php echo $rows['id'] ?>" class="text-primary"><i class="fa fa-fw fa-eye"></i>View</a>
-						</td>
-                        <td align="center">
-							<a href="updateUser.php?id=<?php echo $rows['id'] ?>" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
-							<a href="deleteUser.php?id=<?php echo $rows['id'] ?>" id=<?php echo $rows['id'] ?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
+							<a href="update-request.php?id=<?php echo $rows['id'] ?>" class="text-primary updateBtn"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
+						    <a href="delete-request.php?id=<?php echo $rows['id'] ?>" name="deleteRequest" class="text-danger" onClick="return confirm('Are you sure to delete this user Request?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
                         </td>
                         
                         </tr>
                         <?php
-                        $count++;}
-                        
-                        }
+                      $count++;  }
+                    }
+                }
+                else{
+                    echo " ERROR: $dbConn->error ";
+                }
                         ?>
                     </tbody>
+                    
                     </table>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+                    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.jqueryui.min.css"/>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
  <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
@@ -170,16 +175,15 @@ include('includes/sidewrapper.php');
                     
               
         </div>
-    </div>
-    
-</div>
+
+
 <?php
 include('includes/footer.php');
 ?>
 </body>
 <script type="text/javascript">
   $( document ).ready(function() {
-    $('#users-data').DataTable({
+    $('#accepted').DataTable({
        dom: 'Bfrtip',
       buttons: [
         'copy', 'excel','csv','pdf'

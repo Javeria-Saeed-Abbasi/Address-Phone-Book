@@ -53,9 +53,10 @@ include('includes/sidewrapper.php');
         <!-- ================ Content Div ==================== -->
         <div class="col-8 col-md-10 col-lg-10 pt-2 bg-light overflow-auto" style="max-height:460px;">
                     <div class="container jumbotron bg-primary shadow-lg w-100" >
-                    <div class="container" >
-                    <h1 class="text-center">Contact List of Username</h1>
+                    <div class="container">
+                    <h1 class="text-center">Contact List of Username </h1>
                     </div>
+                     
                     <!-- Search bar -->
                         <!-- <form class="form-inline my-2 my-lg-0">
                         <div class="input-group w-50 mx-auto">

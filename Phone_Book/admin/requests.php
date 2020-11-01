@@ -1,6 +1,9 @@
 <?php
 require('../db/config.php');
 session_start();
+if(empty($_SESSION['username'])){
+    header('location:login/login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +87,10 @@ include('includes/sidewrapper.php');
                     <!-- //button group div -->
                     </div>                    
                     <a class="btn btn-danger" href="#" role="button"><i class="fa fa-trash"></i>  Delete All</a>
+                    <a href="acceptedRequest.php" class="btn btn-success my-2">Accepted Request</a>
+                    <a href="rejectedRequest.php"  class="btn btn-danger my-2">Rejected Request</a>
                     </center>
+                    
 
 </div>
               <!-- //jumbotorn ends div -->
@@ -119,7 +125,11 @@ include('includes/sidewrapper.php');
                         $query = "SELECT * from `requests`;";
                         $result = mysqli_query($dbConn,$query);
                         if ($result->num_rows > 0) {
+
                         while($rows= mysqli_fetch_array($result)){
+                            if($rows['status'] == 'created'){
+
+                            
 
                         ?>
                         <tr>
@@ -134,9 +144,9 @@ include('includes/sidewrapper.php');
                         <td><small><i><date><?php echo $rows['date']; ?></date></i></small></td>
                         <td><button class="btn btn-secondary my-2">Pending</button></td>
 
-                        <td><a href="accept.php" class="btn btn-success my-2">Accept</a></td>
+                        <td><a href="accept.php?id=<?php echo $rows['id'] ?> " name="acceptBtn" class="btn btn-success my-2">Accept</a></td>
 
-                        <td><a href="" class="btn btn-danger my-2">Reject</a></td>
+                        <td><a href="reject.php?id=<?php echo $rows['id'] ?>"  class="btn btn-danger my-2">Reject</a></td>
                         
                         <td align="center">
 							<a href="update-request.php?id=<?php echo $rows['id'] ?>" class="text-primary updateBtn"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
@@ -147,6 +157,10 @@ include('includes/sidewrapper.php');
                         <?php
                       $count++;  }
                     }
+                }
+                else{
+                    echo " ERROR: $dbConn->error ";
+                }
                         ?>
                     </tbody>
                     

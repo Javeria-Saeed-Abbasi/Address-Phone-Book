@@ -1,5 +1,6 @@
 <?php
 require('../db/config.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,49 +39,62 @@ require('../db/config.php');
 				
 				<div class=" col-6 col-sm-6 col-md-6 mx-auto" id="edit-contact">
 					<!-- <h5 class="card-title">Fields with <span class="text-danger">*</span> are mandatory!</h5> -->
-					<form method="post">
+					<?php
+				$id = $_GET['id']; 
+				$query="SELECT * FROM `users_contact` WHERE id='.$id.'; ";
+				$results = mysqli_query($dbConn, $query);
+				while($rows = mysqli_fetch_array($results))
+				{
+  					?>
+					<form method="post" action="crud-contacts/update-Contact.php" >
+					<!-- <input type="hidden" name ="contact_id" value= "<?php echo $rows['id'];?>"><br> -->
 						<div class="form-group ">
-							<label>First Name <span class="text-danger">*</span></label>
-							<input type="text" name="firstname" id="firstname" class="form-control" value="<?php echo $row[0]['username']; ?>" placeholder="Enter first name" required>
+							<label>First Name <!---<span class="text-danger">*</span>----></label>
+							<input type="text" name="updateFirstname" id="firstname" class="form-control" value="<?php echo $rows['first-name']; ?>" placeholder="Enter first name" required>
 						</div>
 						<div class="form-group ">
-							<label>Last Name <span class="text-danger">*</span></label>
-							<input type="text" name="lastname" id="lastname" class="form-control" value="<?php echo $row[0]['username']; ?>" placeholder="Enter last name" required>
+							<label>Last Name <!---<span class="text-danger">*</span>----></label>
+							<input type="text" name="updateLastname" id="lastname" class="form-control" value="<?php echo $rows['last-name']; ?>" placeholder="Enter last name" required>
 						</div>
 						<div class="form-group">
-							<label>Email <span class="text-danger">*</span></label>
-							<input type="email" name="email" id="email" class="form-control" value="<?php echo $row[0]['useremail']; ?>" placeholder="Enter email" required>
+							<label>Email<!---<span class="text-danger">*</span>----></label>
+							<input type="email" name="updateEmail" id="email" class="form-control" value="<?php echo $rows['email']; ?>" placeholder="Enter email" >
 						</div>
 						<div class="form-group">
-							<label>Phone <span class="text-danger">*</span></label>
-							<input type="tel" name="userphone" id="userphone" maxlength="12" class="form-control" value="<?php echo $row[0]['userphone']; ?>" placeholder="Enter phone" required>
+							<label>Phone <!---<span class="text-danger">*</span>----></label>
+							<input type="tel" name="updateUserphone" id="userphone" maxlength="12" class="form-control" value="<?php echo $rows['phone']; ?>" placeholder="Enter phone" >
 						</div>
 						<div class="form-group">
 							<label for="inputAddress">Address</label>
-							<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+							<input type="text" name ="updateAddress" class="form-control" id="inputAddress" value="<?php echo $rows['address']; ?>" placeholder="1234 Main St">
 						</div>
 						<div class="form-group">
 							<label for="inputCity">City</label>
-							<input type="text" class="form-control" id="inputCity" placeholder="Karachi">
+							<input type="text" name ="updateCity" class="form-control" value="<?php echo $rows['city']; ?>"  id="inputCity" placeholder="Karachi">
 						</div>
 						<div class="form-group ">
 							<label for="inputCountry">Country</label>
-							<input type="text" class="form-control" id="inputCountry" placeholder="Pakistan">
+							<input type="text" name ="updateCountry" class="form-control" value="<?php echo $rows['country']; ?>"  id="inputCountry" placeholder="Pakistan">
 						</div>
 						
 					
 						<div class="form-group">
-							<input type="hidden" name="editId" id="editId" value="<?php echo $_REQUEST['editId']?>">
-							<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary"><i class="fa fa-fw fa-edit"></i> Update Contact</button>
+							<!-- <input type="hidden" name="editId" id="editId" value="<?php echo $_REQUEST['editId']?>"> -->
+							<button type="submit" value="<?php echo $rows['id']; ?>"  name="updateContact" value="submit" id="submit" class="btn btn-primary"><i class="fa fa-fw fa-edit"></i> Update Contact</button>
 							<br/><br/><br/>
 							<center><a href="index.php">Back to Contact List</a><center>
 						</div>
-						
+						<?php
+						}
+						?>
 					</form>
+					
 				</div>
+				
 			</div>
 		</div>
 	</div>
+
 	<!-- ==================== FOOTER ============================ -->
 	<?php include('includes/footer.php'); ?>
 </body>
