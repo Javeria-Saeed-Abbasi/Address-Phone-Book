@@ -13,11 +13,11 @@
  ?>
  <!-- Search bar -->
 <br/>
- <form class="form-inline my-2 my-lg-0">
+ <form class="form-inline my-2 my-lg-0" action="./searchedlist.php" role="search" method="POST">
  <div class="input-group w-50 mx-auto">
-    <input type="search" class="form-control" placeholder="Search" aria-label="Search">
+    <input type="search" class="form-control" name="txtSearch"  placeholder="Search" aria-label="Search">
     <div class="input-group-append">
-      <button class="btn btn-secondary" type="button">
+      <button class="btn btn-secondary" name="bntSearch" type="submit">
         <i class="fa fa-search"></i>
       </button>
     </div>

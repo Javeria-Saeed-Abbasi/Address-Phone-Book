@@ -96,6 +96,7 @@ include('includes/sidewrapper.php');
                     <!-- <div class="container" id="contact-list">
                     <h3 class="text-center">CONTACT LIST</h3>
                     </div> -->
+                    
                     <!-- contact table -->
                     <div class="container shadow-lg pt-5 pb-5">
                     <table class="table table-striped table-responsive-sm" id="contacts">
