@@ -37,6 +37,11 @@ if(empty($_SESSION['username'])){
     margin: 2px;
     background-color: #2c964c;
 }
+/* for highlighted records of search */
+    mark {
+        background-color:yellow;
+    }
+
 </style>
 
 </head>
@@ -157,7 +162,9 @@ include('includes/sidewrapper.php');
  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
-   
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/6.1.0/jquery.mark.min.js"></script>
+
+
 
                     </div>
                     
@@ -178,6 +185,24 @@ include('includes/footer.php');
         'copy', 'excel','csv','pdf'
     ]
     });
+
+});
+$(document).ready(function() {
+
+// create a data table
+var table = $('#contacts').DataTable();
+
+// add custom listener to draw event on the table
+table.on("draw",function() {
+    // get the search keyword
+    var keyword = $('#contacts_filter > label:eq(0) > input').val();
+
+    // clear all the previous highlighting
+    $('#contacts').unmark();
+
+    // highlight the searched word
+    $('#contacts').mark(keyword,{});
+});
 
 });
 </script>

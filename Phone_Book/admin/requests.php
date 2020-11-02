@@ -100,7 +100,7 @@ include('includes/sidewrapper.php');
                     </div> -->
                     <!-- Requests contact table -->
                     <div id="users-list" class="container shadow-lg pt-5 pb-5 bg-warning overflow-auto">
-                    <table class="table table-striped table-responsive-sm w-auto" id="contacts-data">
+                    <table class="table table-striped table-responsive-sm w-auto" id="request-data">
                     <thead class="bg-primary text-white">
                         <tr>
                         <th scope="col">#</th>
@@ -176,7 +176,8 @@ include('includes/sidewrapper.php');
  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
-   
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/6.1.0/jquery.mark.min.js"></script>
+
                     </div>
                     
               
@@ -189,12 +190,30 @@ include('includes/footer.php');
 </body>
 <script type="text/javascript">
   $( document ).ready(function() {
-    $('#contacts-data').DataTable({
+    $('#request-data').DataTable({
        dom: 'Bfrtip',
       buttons: [
         'copy', 'excel','csv','pdf'
     ]
     });
+
+});
+$(document).ready(function() {
+
+// create a data table
+var table = $('#request-data').DataTable();
+
+// add custom listener to draw event on the table
+table.on("draw",function() {
+    // get the search keyword
+    var keyword = $('#request-data_filter > label:eq(0) > input').val();
+
+    // clear all the previous highlighting
+    $('#request-data').unmark();
+
+    // highlight the searched word
+    $('#request-data').mark(keyword,{});
+});
 
 });
 </script>
