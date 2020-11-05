@@ -16,6 +16,23 @@ require_once ('../db/config.php');
     <title>Verification Email</title>
 </head>
 <body>
+<?php
+
+ if(isset($_POST['email_verify'])){
+$email = $_POST['email'];
+$query = "SELECT * FROM  `registered_users` WHERE `email` = '$email'; " ;
+$result = mysqli_query($dbConn, $query);
+if ($result->num_rows > 0) {
+  // echo "record verify"; 
+  echo "<script>alert('Email verified.')</script>" ; 	
+  header("location:resetpass.php");
+}else
+{
+  echo "<script>alert('Email not Found'.)</script>";
+}
+
+}
+?>
     <?php
     include('navbar.php');
     ?>
@@ -31,7 +48,7 @@ require_once ('../db/config.php');
        </div>
        <div class="container border col-5 shadow-lg  p-3 mb-5 bg-white rounded">
     <div class="container pl-0 pr-0" id="email-verify-form">
-        <form method="post" class=" mx-auto"> 
+        <form method="POST" action="<?php echo ($_SERVER['PHP_SELF'])?>" class=" mx-auto"> 
               <br/>
 
           <h3 class=" mb-3 font-weight-normal text-center">Email Verification</h3>

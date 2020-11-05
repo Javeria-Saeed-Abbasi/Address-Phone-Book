@@ -22,6 +22,26 @@ require_once ('../db/config.php');
     </style>
 </head>
 <body>
+<?php
+if(isset($_POST['reset-password'])){
+    $password = $_POST['password'];
+    $re_password = $_POST['re-enter-password'];
+    if($password!=$re_password) {
+		echo"<script>alert('Password does not match the confirm password field'.)</script>";
+	} else{
+        $query = "UPDATE `registered_users` SET `password`= '.$password.';" ;
+    
+    $result = mysqli_query($dbConn, $query);
+    if(mysqli_query($dbConn,$query)){
+        echo "<script>alert('Password Updated successfully.')</script>";
+        header("location:login.php");
+    } else{
+        echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
+    }
+    exit();
+    }
+    }
+?>
     <?php
     include('navbar.php');
     ?>
@@ -33,7 +53,7 @@ require_once ('../db/config.php');
        </div>
        <div class="container border col-5 shadow-lg  p-3 mb-5 bg-white rounded">
     <div class="container pl-0 pr-0" >
-        <form method="post" class="reset-password-form mx-auto"> 
+        <form method="POST" action="resetpass.php" class="reset-password-form mx-auto"> 
             <div class="btn-group w-100" role="group" aria-label="Basic example">
                 <a class="btn btn-light active" href="login.php" role="button">Login</a>
             
@@ -42,7 +62,7 @@ require_once ('../db/config.php');
               <br/> <br/> 
           <h3 class=" mb-3 font-weight-normal text-center">Reset Password</h3>
             
-          <label for="inputPassword">Password</label>
+          <label for="inputPassword">New Password</label>
           <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
             <br/> 

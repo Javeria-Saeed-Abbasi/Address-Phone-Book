@@ -48,15 +48,18 @@ if (isset($_POST['signin']))
 
 $query = "SELECT * from `admin` WHERE  username = '".$username."' AND  password ='".$password."' ;";
 // if ($result=$dbConn->query($query)) {}
-$result = mysqli_query ($dbConn , $query);    
+$result = mysqli_query ($dbConn , $query);   
 
-if (mysqli_num_rows($result) ==1) {
+if ($result->num_rows > 0) {
+while($rows= mysqli_fetch_array($result)){
+  $_SESSION['id'] = $rows['id'];
   $_SESSION['message'] = "You are logged in";
   $_SESSION['username'] = $username ;
 
   header("location:../index.php");
-  // echo "next page";
-}
+  }
+} 
+
 else{
   echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
   // $_SESSION ['message'] = "query unscusssesful" . $dbConn->error;

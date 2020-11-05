@@ -199,6 +199,7 @@ $results = mysqli_query($dbConn, $query);
     <input type="text" value="<?php echo $row['sec_answer']; ?>" name="updateSec_answer" class="form-control" id="inputtext" placeholder="Shahid Afridi">
   </div>
 <center>
+<!-- <a href="includes/update.php?id=<?php echo $row['id'] ?>" type="submit" name="updateRequest" class="btn btn-primary" >UPDATE</a>   -->
   <button type="submit" name="updateRequest" value="<?php echo $row['id']; ?>" class="btn btn-primary" >UPDATE</button>
   <br/><br/>
  </center>

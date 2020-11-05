@@ -1,6 +1,7 @@
 <?php
 require_once ('../db/config.php');
 session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,10 +43,10 @@ session_start();
 <body>
 <?php
 
- if(isset($_POST['updateRequest']))
+ if(isset($_POST['updateUser']))
  {
-  $id = $_POST['id'];
-      // $profilepic = $_POST['profileavatar'];
+  $id =$_GET['id'];  
+  // $profilepic = $_POST['profileavatar'];
       $username = $_POST['updateUsername'];
       $email = $_POST['updateEmail'];
       $password = $_POST['updatePassword'];
@@ -67,12 +68,13 @@ session_start();
   	}else if(mysqli_num_rows($res_e) > 0){
   	  $email_error = "Sorry... email already taken"; 	
   	}else{
-      $query = "UPDATE `requests` SET `username`=".$username.",`email`=".$email.",`password`=".$password.",`phone`=".$phone.",`city`= ".$city.",`country`=".$country.",`address`=".$address.",`sec_question`=".$sec_ques.",`sec_answer`=".$sec_answ.", WHERE `id` =".$id."; ";
+      $query = "UPDATE `registered_users` SET `username`='".$username."',`email`='".$email."',`password`='".$password."',`phone`='".$phone."',`city`= '".$city."',`country`='".$country."',`address`='".$address."',`sec_ques`='".$sec_ques."',`sec_ans`='".$sec_answ."' WHERE `id` ='".$id."'; ";
+      
 // (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_ques`,`sec_ans`,`date`) VALUES (NULL, '$profilepic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
            $result = mysqli_query($dbConn, $query);
            if(mysqli_query($dbConn,$query)){
             echo "<script>alert('Data Updated successfully.')</script>";
-            header("location:requests.php");
+            header("location:index.php");
         } else{
             echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
         }
@@ -103,19 +105,20 @@ include('includes/navbar.php');
             <div class="btn-group w-100" role="group" aria-label="Basic example">
                 <!-- <a class="btn btn-light" href="login.php" role="button">Login</a> -->
                 <!-- <button type="button" class="btn btn-light active">Login</button> -->
-                <a class="btn btn-light active" href="#" role="button">Update Request</a>
+                <a class="btn btn-light active" href="#" role="button">Update User Information</a>
               </div>        
               <br/><br/> 
-          <h3 class=" mb-3 font-weight-normal">Update User</h3>
-          </div>
-<?php
+              <?php
 $id = $_GET['id'];
-$query="SELECT * FROM `registered_users` WHERE id=$id";
+$query="SELECT * FROM `registered_users` WHERE id= $id " ;
 $results = mysqli_query($dbConn, $query);
-  while($row=mysqli_fetch_array($results))
+  while($row = mysqli_fetch_array($results))
   {
   ?>
-          <form class="md-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
+          <h3 class=" mb-3 font-weight-normal">Update <?php echo $row['username']; ?> </h3>
+          </div>
+
+          <form class="md-form" action="updateUser.php" method="POST" enctype="multipart/form-data">
           <center>
           <div class="file-field">
     <div class="mb-2">
@@ -195,7 +198,9 @@ $results = mysqli_query($dbConn, $query);
     <input type="text" value="<?php echo $row['sec_ans']; ?>" name="updateSec_answer" class="form-control" id="inputtext" placeholder="Shahid Afridi">
   </div>
 <center>
-  <button type="submit" name="updateRequest" value="<?php echo $row['id']; ?>" class="btn btn-primary" >UPDATE</button>
+<!-- <a href="includes/update.php?id=<?php echo $row['id'] ?>" type="submit" name="updateUser" class="btn btn-primary" >UPDATE</a>   -->
+
+  <button type="submit" name="updateUser" value="<?php echo $row['id']; ?>" class="btn btn-primary" >UPDATE</button>
   <br/><br/>
  </center>
  <?php
