@@ -4,6 +4,7 @@ include('../db/config.php');
 if(empty($_SESSION['username'])){
     header('location:../login/login.php');
 }
+// echo  " Session ID ". $_SESSION['id'] ;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,10 +121,11 @@ include('includes/sidewrapper.php');
                     </thead>
                     <tbody>
                     <?php
-                        //  $_SESSION['user-id'] = $userID;
+                         $userID = $_SESSION['id'];
+                        //  var_dump($userID);
                         // $query = "select * from `users_contact` where `user-id` = '$userID'; ";
                         $count= 1;
-                        $query ="SELECT * from `users_contact`; ";
+                        $query ="SELECT * from `users_contact` WHERE  `user-id` = '$userID'; ";
                         $result = mysqli_query($dbConn,$query);
                         if ($result->num_rows > 0) {
                         while($rows= mysqli_fetch_array($result)){

@@ -61,21 +61,19 @@ $email = "";
       $sec_answ = $_POST['sec_answer'];
 
       //For Authentication of unique Username and Email:
-    $query_username = " SELECT * FROM requests WHERE username ='$username'";
-    $query_email = " SELECT * FROM requests WHERE email ='$email'";
+    $query_username = " SELECT * FROM `requests` WHERE username ='$username' AND email ='$email'";
     $res_u = mysqli_query($dbConn,  $query_username);
-    $res_e = mysqli_query($dbConn, $query_email);
     
     if (mysqli_num_rows($res_u) > 0) {
-  	  $name_error = "Sorry... username already taken"; 	
-  	}else if(mysqli_num_rows($res_e) > 0){
-  	  $email_error = "Sorry... email already taken"; 	
-  	}else{
-      $query = "INSERT INTO `requests` (`id`,  `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_question`,`sec_answer`,`date`) VALUES (NULL, '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
+  	  $name_error = "Sorry... username or email already taken"; 	
+    }
+    else{
+      $query = "INSERT INTO `requests` ( `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_question`,`sec_answer`,`date`) VALUES ( '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
            $results = mysqli_query($dbConn, $query);
-           if(mysqli_query($dbConn,$query)){
-            echo "<script>alert('Records inserted successfully. Your account reqest is now pending for approval by admin. Please wait for confirmation. Thank you.')</script>";
+           if($results){
+            echo "<script>alert('Your account reqest is now pending for approval by admin. Please wait for confirmation. Thank you.')</script>";
             header("login.php");
+            exit;
         } else{
             echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
         }

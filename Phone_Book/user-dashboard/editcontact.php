@@ -45,12 +45,12 @@ if(empty($_SESSION['username'])){
 					<!-- <h5 class="card-title">Fields with <span class="text-danger">*</span> are mandatory!</h5> -->
 					<?php
 				$id = $_GET['id']; 
-				$query="SELECT * FROM `users_contact` WHERE id='.$id.'; ";
+				$query="SELECT * FROM `users_contact` WHERE id='$id'; ";
 				$results = mysqli_query($dbConn, $query);
 				while($rows = mysqli_fetch_array($results))
 				{
   					?>
-					<form method="post" action="crud-contacts/update-Contact.php" >
+					<form method="post" action="crud-contacts/update-Contact.php?id=<?= $id; ?>" >
 					<!-- <input type="hidden" name ="contact_id" value= "<?php echo $rows['id'];?>"><br> -->
 						<div class="form-group ">
 							<label>First Name <!---<span class="text-danger">*</span>----></label>

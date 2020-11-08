@@ -52,8 +52,9 @@ $result = mysqli_query ($dbConn , $query);
 
 if ($result->num_rows > 0) {
 while($rows= mysqli_fetch_array($result)){
+  
   $_SESSION['id'] = $rows['id'];
-  $_SESSION['message'] = "You are logged in";
+  // $_SESSION['message'] = "You are logged in";
   $_SESSION['username'] = $username ;
 
   header("location:../index.php");
@@ -61,8 +62,8 @@ while($rows= mysqli_fetch_array($result)){
 } 
 
 else{
-  echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
-  // $_SESSION ['message'] = "query unscusssesful" . $dbConn->error;
+  echo "<script> alert('Username Or Password is incorrect') </script>";
+  // echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
 }
 // else { "query unsucessful". $dbConn->error;
 

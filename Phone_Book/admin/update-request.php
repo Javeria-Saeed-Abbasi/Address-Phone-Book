@@ -45,44 +45,80 @@ if(empty($_SESSION['username'])){
 </head>
 <body>
 <?php
+if(isset($_POST['updateRequest']))
+{
+ $id = $_GET['id'];  
+ // $profilepic = $_POST['profileavatar'];
+     $username = $_POST['updateUsername'];
+     $email = $_POST['updateEmail'];
+     $password = $_POST['updatePassword'];
+     $phone= $_POST['updatePhone'];
+     $city= $_POST['updateCity'];
+     $country= $_POST['updateCountry'];
+     $address= $_POST['updateAddress'];
+     $sec_ques = $_POST['updateSec_question'];
+     $sec_answ = $_POST['updateSec_answer'];
 
- if(isset($_POST['updateRequest']))
- {
-  $id = $_POST['id'];
-      // $profilepic = $_POST['profileavatar'];
-      $username = $_POST['updateUsername'];
-      $email = $_POST['updateEmail'];
-      $password = $_POST['updatePassword'];
-      $phone= $_POST['updatePhone'];
-      $city= $_POST['updateCity'];
-      $country= $_POST['updateCountry'];
-      $address= $_POST['updateAddress'];
-      $sec_ques = $_POST['updateSec_question'];
-      $sec_answ = $_POST['updateSec_answer'];
-
-      //For Authentication of unique Username and Email:
-    $query_username = "SELECT * FROM `registered_users` WHERE username ='.$username.'";
-    $query_email = "SELECT * FROM `registered_users` WHERE email ='.$email.'";
-    $res_u = mysqli_query($dbConn,  $query_username);
-    $res_e = mysqli_query($dbConn, $query_email);
-    
-    if (mysqli_num_rows($res_u) > 0) {
-  	  $name_error = "Sorry... username already taken"; 	
-  	}else if(mysqli_num_rows($res_e) > 0){
-  	  $email_error = "Sorry... email already taken"; 	
-  	}else{
-      $query = "UPDATE `requests` SET `username`=".$username.",`email`=".$email.",`password`=".$password.",`phone`=".$phone.",`city`= ".$city.",`country`=".$country.",`address`=".$address.",`sec_question`=".$sec_ques.",`sec_answer`=".$sec_answ.", WHERE `id` =".$id."; ";
+     //For Authentication of unique Username and Email:
+   $query_username = "SELECT * FROM `registered_users` WHERE username ='.$username.'";
+   $query_email = "SELECT * FROM `registered_users` WHERE email ='.$email.'";
+   $res_u = mysqli_query($dbConn,  $query_username);
+   $res_e = mysqli_query($dbConn, $query_email);
+   
+   if (mysqli_num_rows($res_u) > 0) {
+     $name_error = "Sorry... username already taken"; 	
+   }else if(mysqli_num_rows($res_e) > 0){
+     $email_error = "Sorry... email already taken"; 	
+   }else{
+     $query = "UPDATE `requests` SET `username`='".$username."',`email`='".$email."',`password`='".$password."',`phone`='".$phone."',`city`= '".$city."',`country`='".$country."',`address`='".$address."',`sec_question`='".$sec_ques."',`sec_answer`='".$sec_answ."' WHERE `id` ='".$id."'; ";
 // (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_ques`,`sec_ans`,`date`) VALUES (NULL, '$profilepic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
-           $result = mysqli_query($dbConn, $query);
-           if(mysqli_query($dbConn,$query)){
-            echo "<script>alert('Data Updated successfully.')</script>";
-            header("location:requests.php");
-        } else{
-            echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
-        }
-        exit();
-    }
-  }
+          $result = mysqli_query($dbConn, $query);
+          if(mysqli_query($dbConn,$query)){
+           echo "<script>alert('Data Updated successfully.')</script>";
+           header("location:requests.php");
+       } else{
+           echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
+       }
+       exit();
+   }
+ }
+//  if(isset($_POST['updateRequest']))
+//  {
+//   $id = $_GET['id'];
+//       // $profilepic = $_POST['profileavatar'];
+//       $username = $_POST['updateUsername'];
+//       $email = $_POST['updateEmail'];
+//       $password = $_POST['updatePassword'];
+//       $phone= $_POST['updatePhone'];
+//       $city= $_POST['updateCity'];
+//       $country= $_POST['updateCountry'];
+//       $address= $_POST['updateAddress'];
+//       $sec_ques = $_POST['updateSec_question'];
+//       $sec_answ = $_POST['updateSec_answer'];
+
+//       //For Authentication of unique Username and Email:
+//     $query_username = "SELECT * FROM `registered_users` WHERE username ='.$username.'";
+//     $query_email = "SELECT * FROM `registered_users` WHERE email ='.$email.'";
+//     $res_u = mysqli_query($dbConn,  $query_username);
+//     $res_e = mysqli_query($dbConn, $query_email);
+    
+//     if (mysqli_num_rows($res_u) > 0) {
+//   	  $name_error = "Sorry... username already taken"; 	
+//   	}else if(mysqli_num_rows($res_e) > 0){
+//   	  $email_error = "Sorry... email already taken"; 	
+//   	}else{
+//       $query = "UPDATE `requests` SET `username`=".$username.",`email`=".$email.",`password`=".$password.",`phone`=".$phone.",`city`= ".$city.",`country`=".$country.",`address`=".$address.",`sec_question`=".$sec_ques.",`sec_answer`=".$sec_answ.", WHERE `id` =".$id."; ";
+// // (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_ques`,`sec_ans`,`date`) VALUES (NULL, '$profilepic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
+//            $result = mysqli_query($dbConn, $query);
+//            if(mysqli_query($dbConn,$query)){
+//             echo "<script>alert('Data Updated successfully.')</script>";
+//             header("location:requests.php");
+//         } else{
+//             echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
+//         }
+//         exit();
+//     }
+//   }
 ?>
 
 <?php
@@ -114,12 +150,12 @@ include('includes/navbar.php');
           </div>
 <?php
 $id = $_GET['id'];
-$query="SELECT * FROM `requests` WHERE id=$id";
+$query="SELECT * FROM `requests` WHERE id= $id ";
 $results = mysqli_query($dbConn, $query);
-  while($row=mysqli_fetch_array($results))
+  while($row = mysqli_fetch_array($results))
   {
   ?>
-          <form class="md-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
+          <form class="md-form" action="update-request.php?id=<?= $id; ?>" method="POST" enctype="multipart/form-data">
           <center>
           <div class="file-field">
     <div class="mb-2">

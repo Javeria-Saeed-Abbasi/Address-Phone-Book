@@ -52,12 +52,12 @@ session_start();
 						<div class="form-group ">
 							<label>Last Name </label>
 							<!-- <input type="text" name="lastname" id="lastname" class="form-control" value="<?php echo $row[0]['username']; ?>" placeholder="Enter last name" required> -->
-							<input type="text" name="lastname" id="lastname" class="form-control"  placeholder="Enter last name" required>
+							<input type="text" name="lastname" id="lastname" class="form-control"  placeholder="Enter last name" >
 						</div>
 						<div class="form-group">
 							<label>Email </label>
 							<!-- <input type="email" name="email" id="email" class="form-control" value="<?php echo $row[0]['useremail']; ?>" placeholder="Enter email" required> -->
-							<input type="email" name="email" id="email" class="form-control"  placeholder="Enter email" required>
+							<input type="email" name="email" id="email" class="form-control"  placeholder="Enter email" >
 						</div>
 						<div class="form-group">
 							<label>Phone </label>

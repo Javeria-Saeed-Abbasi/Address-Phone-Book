@@ -57,21 +57,19 @@ $email = "";
       $sec_answ = $_POST['sec_answer'];
 
       //For Authentication of unique Username and Email:
-    $query_username = " SELECT * FROM `registered_users` WHERE username ='$username'";
-    $query_email = " SELECT * FROM `registered_users` WHERE email ='$email'";
+    $query_username = " SELECT * FROM `registered_users` WHERE username ='$username' AND email ='$email'";
     $res_u = mysqli_query($dbConn,  $query_username);
-    $res_e = mysqli_query($dbConn, $query_email);
     
-    if (mysqli_num_rows($res_u) > 0) {
-  	  $name_error = "Sorry... username already taken"; 	
-  	}else if(mysqli_num_rows($res_e) > 0){
-  	  $email_error = "Sorry... email already taken"; 	
-  	}else{
-      $query = "INSERT INTO `registered_users` (`id`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_ques`,`sec_ans`,`date`) VALUES (NULL,  '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
-           $results = mysqli_query($dbConn, $query);
-           if(mysqli_query($dbConn,$query)){
+    if (mysqli_num_rows ($res_u) > 0) {
+  	  $name_error = "Sorry... username or email already taken"; 	
+    }
+    else{
+      $query = "INSERT INTO `registered_users` ( `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_ques`,`sec_ans`,`date`) VALUES ( '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
+            $results = mysqli_query($dbConn, $query);
+           if($results){
             echo "<script>alert('Records inserted successfully.')</script>";
             header("location:#users-list");
+            exit;
         } else{
             echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
         }

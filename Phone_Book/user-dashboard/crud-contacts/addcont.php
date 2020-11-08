@@ -9,6 +9,7 @@ session_start();
 
     if(ISSET($_POST['insertData']))
     {
+      $userID =  $_SESSION['id'];
       $firstname = $_POST['firstname'];
       $lastname = $_POST['lastname'];
       $email = $_POST['email'];

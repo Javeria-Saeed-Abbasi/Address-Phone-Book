@@ -45,7 +45,7 @@ session_start();
 
  if(isset($_POST['updateUser']))
  {
-  $id =$_GET['id'];  
+  $id = $_GET['id'];  
   // $profilepic = $_POST['profileavatar'];
       $username = $_POST['updateUsername'];
       $email = $_POST['updateEmail'];
@@ -69,7 +69,6 @@ session_start();
   	  $email_error = "Sorry... email already taken"; 	
   	}else{
       $query = "UPDATE `registered_users` SET `username`='".$username."',`email`='".$email."',`password`='".$password."',`phone`='".$phone."',`city`= '".$city."',`country`='".$country."',`address`='".$address."',`sec_ques`='".$sec_ques."',`sec_ans`='".$sec_answ."' WHERE `id` ='".$id."'; ";
-      
 // (`id`, `profile_pic`, `username`, `email`, `password`,`phone`,`city`,`country`,`address`,`sec_ques`,`sec_ans`,`date`) VALUES (NULL, '$profilepic', '$username', '$email', '$password', ' $phone', '$city', '$country', '$address','$sec_ques','$sec_answ', CURRENT_TIMESTAMP)";
            $result = mysqli_query($dbConn, $query);
            if(mysqli_query($dbConn,$query)){
@@ -118,7 +117,7 @@ $results = mysqli_query($dbConn, $query);
           <h3 class=" mb-3 font-weight-normal">Update <?php echo $row['username']; ?> </h3>
           </div>
 
-          <form class="md-form" action="updateUser.php" method="POST" enctype="multipart/form-data">
+          <form class="md-form"  method="POST" enctype="multipart/form-data" action="updateUser.php?id=<?= $id; ?>">
           <center>
           <div class="file-field">
     <div class="mb-2">

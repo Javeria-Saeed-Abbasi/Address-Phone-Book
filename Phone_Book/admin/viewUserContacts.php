@@ -58,7 +58,8 @@ include('includes/sidewrapper.php');
         <div class="col-8 col-md-10 col-lg-10 pt-2 bg-light overflow-auto" style="max-height:460px;">
                     <div class="container jumbotron bg-primary shadow-lg w-100" >
                     <div class="container">
-                    <h1 class="text-center">Contact List of Username </h1>
+
+                    <h1 class="text-center">Contact List of Username</h1>
                     </div>
                      
                     <!-- Search bar -->
@@ -106,6 +107,7 @@ include('includes/sidewrapper.php');
                     <thead class="bg-primary text-white">
                         <tr>
                         <th scope="col">#</th>
+                        <!-- <th scope="col">user-id</th> -->
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">Email</th>
@@ -120,8 +122,10 @@ include('includes/sidewrapper.php');
                     </thead>
                     <tbody>
                     <?php
+                        $id = $_GET['id'];
+                        //   var_dump($id);
                         $count= 1;
-                        $query = "SELECT * FROM `users_contact`;";
+                        $query = "SELECT * FROM `users_contact` WHERE `user-id` = $id ;";
                         $result = mysqli_query($dbConn,$query);
                         if ($result->num_rows > 0) {
                         while($rows= mysqli_fetch_array($result)){
@@ -129,6 +133,7 @@ include('includes/sidewrapper.php');
                         ?>
                         <tr>
                         <th scope="row"><?php echo $count;?></th>
+                        <!-- <th scope="row"><?php $rows['user-id']; ?></th> -->
                         <!-- <th scope="row"><?php echo $rows['id']; ?></th> -->
                         <td><?php echo $rows['first-name']; ?></td>
                         <td><?php echo $rows['last-name']; ?></td>                        <td><?php echo $rows['email']; ?></td>

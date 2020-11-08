@@ -1,7 +1,8 @@
 <?php
 require_once('../../db/config.php');
-$id = $_GET['id'];
+
 if(isset($_POST['updateContact'])){
+   $id = $_GET['id'];
 //    $contact_id = $_POST['contact_id'];
    $fname = $_POST['updateFirstname'];
    $lastname = $_POST['updateLastname'];
@@ -12,17 +13,19 @@ if(isset($_POST['updateContact'])){
    $country =  $_POST['updateCountry'];
    
    
-$query = "UPDATE `users_contact` SET `first-name`='.$fname.',`last-name`='.$lastname.',`email`='.$email.',`phone`='.$phone.',`address`='.$address.',`city`='.$city.',`country`='.$country.' WHERE `id` ='.$id.'";
+$query = "UPDATE `users_contact` SET `first-name`='".$fname."',`last-name`='".$lastname."',`email`='".$email."',`phone`='".$phone."',`address`='".$address."',`city`='".$city."',`country`='".$country."' WHERE `id` ='".$id."' ";
 $result = mysqli_query($dbConn, $query);
 if($result){
 	
 	echo '<script> alert("Data Updated Successfully."); </script>';
-	header("Location:index.php");
+	header("Location:../index.php");
 }else  {
  	 echo '<script> alert("Data Not Updated"); </script>';  
 
 }	
+exit();
 }
+
 // $profileid = $_GET['editProfile']; // GETTING ID FROM URL
 // $query = "SELECT * FROM userdetails WHERE contact_id ='$profileid' ";
 // $result = @mysqli_query($query);

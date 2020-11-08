@@ -1,7 +1,6 @@
 <?php
-session_start();
 require_once ('../db/config.php');
-
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,20 +43,24 @@ if (isset($_POST['signin']))
   $username= $_POST['username'];
   $password= $_POST ['password'];
 
-$query = "SELECT * from `registered_users` WHERE  username = '".$username."' AND  password ='".$password."' ;";
-// if ($result=$dbConn->query($query)) {}
+  $query = "SELECT * from `registered_users` WHERE  username = '".$username."' AND  password ='".$password."' ;";
+  // if ($result=$dbConn->query($query)) {}
 $result = mysqli_query ($dbConn , $query);    
 
-if (mysqli_num_rows($result) ==1) {
+if ($result->num_rows > 0) {
+  while($rows= mysqli_fetch_array($result)){
+  $_SESSION['id'] = $rows['id'];
   $_SESSION['message'] = "You are logged in";
   $_SESSION['username'] = $username ;
+
   header("location:../user-dashboard/index.php");
   // echo "next page";
 }
-else{
-  $_SESSION['message'] = "query unscusssesful" . $dbConn->error;
 }
-// else { "query unsucessful". $dbConn->error;
+else{
+  echo "<script> alert('Username Or Password is incorrect') </script>";
+  // echo "ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
+}
 
 }
 
@@ -79,7 +82,7 @@ else{
        </div>
        <div class="container border col-5 shadow-lg  p-3 mb-5 bg-white rounded">
     <div class="container pl-0 pr-0" id="login-form">
-        <form method="post" class="form-signin mx-auto"> 
+        <form method="POST" action="login.php" class="form-signin mx-auto"> 
             <div class="btn-group w-100" role="group" aria-label="Basic example">
                 <a class="btn btn-light active" href="login.php" role="button">Login</a>
                 <!-- <button type="button" class="btn btn-light active">Login</button> -->
