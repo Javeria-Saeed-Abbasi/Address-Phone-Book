@@ -80,7 +80,26 @@ include('includes/sidewrapper.php');
                     <div class="container">
                     <center>
                     <div class="btn-group pt-5  my-2 my-lg-0 ">
-                    <a class="btn btn-light" href="#" role="button">Add New Contact</a>
+                    <?php
+                        $id = $_GET['id'];
+                        //   var_dump($id);
+                        $query = "SELECT * FROM `registered_users` WHERE `id` = $id ;";
+                        $result = mysqli_query($dbConn,$query);
+                        if ($result->num_rows > 0) {
+                        while($rows= mysqli_fetch_array($result)){
+
+                        ?>
+                    <form method="POST" action="addNewContact.php?id=<?= $id; ?>">
+                    <!-- <input type="hidden" name="id" value="<?php echo $rows['user-id']; ?>" /> -->
+                    <a class="btn btn-light" href="addNewContact.php?id=<?php echo $rows['id'] ?>" type="button" >Add New Contact</a>
+                    <?php
+                        }
+                        
+                        }
+                        ?>
+                    </form>
+
+   
                     &nbsp;&nbsp;&nbsp;
                     <!-- <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
@@ -136,7 +155,8 @@ include('includes/sidewrapper.php');
                         <!-- <th scope="row"><?php $rows['user-id']; ?></th> -->
                         <!-- <th scope="row"><?php echo $rows['id']; ?></th> -->
                         <td><?php echo $rows['first-name']; ?></td>
-                        <td><?php echo $rows['last-name']; ?></td>                        <td><?php echo $rows['email']; ?></td>
+                        <td><?php echo $rows['last-name']; ?></td>                        
+                        <td><?php echo $rows['email']; ?></td>
                         <td><?php echo $rows['phone']; ?></td>
                         <td><?php echo $rows['address']; ?></td>
                         <td><?php echo $rows['city']; ?></td>
@@ -146,8 +166,9 @@ include('includes/sidewrapper.php');
 							<a href="#" class="text-primary"><i class="fa fa-fw fa-eye"></i>View</a>
 						</td> -->
                         <td align="center">
-							<a href="#?id=<?php echo $rows['id'] ?>" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
-							<a href="#?id=<?php echo $rows['id'] ?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
+                            <!-- <a href="addNewContact.php?id?id=<?php echo $rows['id'] ?>" class="text-primary"><i class="fa fa-fw fa-plus"></i> Add</a> |  -->
+							<a href="updateUserContact.php?id=<?php echo $rows['id'] ?>" class="text-primary"><i class="fa fa-fw fa-edit"></i> Edit</a> | 
+							<a href="deleteUserContact.php?id=<?php echo $rows['id'] ?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i> Delete</a>
                         </td>
                         
                         </tr>
@@ -187,7 +208,7 @@ include('includes/footer.php');
     $('#users-contacts-data').DataTable({
        dom: 'Bfrtip',
       buttons: [
-        'copy', 'excel','csv','pdf'
+        'excel','csv','pdf'
     ]
     });
 

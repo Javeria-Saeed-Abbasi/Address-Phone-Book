@@ -25,7 +25,34 @@ session_start();
 </head>
 <body>
 <?php
+     $userid = $_GET['id'];
+     var_dump($userid);
+    if(isset($_POST['insertData']))
+    {
+     $userid = $_GET['id'];
+      $firstname = $_POST['firstname'];
+      $lastname = $_POST['lastname'];
+      $email = $_POST['email'];
+      $phone = $_POST['userphone'];
+      $address= $_POST['address'];
+      $city= $_POST['city'];
+      $country= $_POST['country'];
+      
+      $query = "INSERT INTO `users_contact` (`user-id`, `first-name`, `last-name`, `email`, `phone`, `address`, `city`, `country`) VALUES ( '$userid', '$firstname', '$lastname', '$email', '$phone',  '$address', '$city', '$country')";
+        // $query = "INSERT INTO `users_contact` (`id`, `user-id`, `first-name`, `last-name`, email`, `phone`, `address`, `city` , `country`) VALUES ( NULL , '$firstname', '$lastname', '$address', '$city', '$country')";       
+        $result = mysqli_query($dbConn, $query);
 
+        if($result){
+            echo "<script>alert('Records inserted successfully. ')</script>";
+            header('Location:index.php');
+            // echo session_id;
+            exit;
+        } else{
+            echo "  ERROR: Could not able to execute $query. " . mysqli_error($dbConn);
+        }
+        exit();
+
+    }
 ?>
 	<?php include('includes/navbar.php'); ?>
 
@@ -42,7 +69,7 @@ session_start();
 				
 				<div class=" col-6 col-sm-6 col-md-6 mx-auto" id="edit-contact">
 					<!-- <h5 class="card-title">Fields with <span class="text-danger">*</span> are mandatory!</h5> -->
-					<form method="POST" action="crud-contacts/addcont.php">
+					<form method="POST" action="addNewContact.php">
 						<div class="form-group ">
 							<label>First Name </label>
 							<!-- <input type="text" name="firstname" id="firstname" class="form-control" value="<?php echo $row[0]['username']; ?>" placeholder="Enter first name" required> -->
@@ -82,7 +109,7 @@ session_start();
 							<!-- <input type="hidden" name="editId" id="editId" value="<?php echo $_REQUEST['editId']?>"> -->
 							<button type="submit" name="insertData" value="submit" class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Add Contact</button>
                             <br/><br/><br/>
-							<center><a href="index.php">Back to Contact List</a><center>
+							<center><a href="viewUserContacts.php">Back to Contact List</a><center>
                         </div>
 						
 					</form>

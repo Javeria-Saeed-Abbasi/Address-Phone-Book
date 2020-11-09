@@ -33,7 +33,36 @@ if(empty($_SESSION['username'])){
 </style>
 </head>
 <body>
+<?php
+if(isset($_POST['profileUpdate'])){
+  $id = $_SESSION['id'];
+//    $contact_id = $_POST['contact_id'];
+$username = $_POST['updateUsername'];
+$email = $_POST['updateEmail'];
+$password = $_POST['updatePassword'];
+$phone= $_POST['updatePhone'];
+$city= $_POST['updateCity'];
+$country= $_POST['updateCountry'];
+$address= $_POST['updateAddress'];
+$sec_ques = $_POST['updateSec_question'];
+$sec_answ = $_POST['updateSec_answer'];
 
+  
+  
+$query = "UPDATE `registered_users` SET `username`='".$username."',`email`='".$email."',`password`='".$password."',`phone`='".$phone."',`city`= '".$city."',`country`='".$country."',`address`='".$address."',`sec_ques`='".$sec_ques."',`sec_ans`='".$sec_answ."' WHERE `id` ='".$id."'; ";
+$result = mysqli_query($dbConn, $query);
+if($result){
+ 
+ echo '<script> alert("Data Updated Successfully."); </script>';
+ header("Location:index.php");
+}
+else  {
+   echo '<script> alert("Data Not Updated"); </script>';  
+
+}	
+exit();
+}
+?>
 <?php
 include('includes/navbar.php');
 ?>
@@ -52,7 +81,14 @@ include('includes/sidewrapper.php');
 			<div class="card-body">
 				
 				<div class=" col-md-8 col-lg-6 mx-auto bg-warning" id="edit-userprofile" >
-<form class="md-form" method="post" enctype="multipart/form-data" id="profile-form">
+        <?php
+				$id = $_SESSION['id']; 
+				$query="SELECT * FROM `registered_users` WHERE id='$id'; ";
+				$results = mysqli_query($dbConn, $query);
+				while($rows = mysqli_fetch_array($results))
+				{
+  					?>
+<form class="md-form" method="POST" action="profile.php?id=<?= $id; ?>" enctype="multipart/form-data" id="profile-form">
   <div class="file-field">
     <div class="mb-2">
      <center> <img src="../images/upload img.png" onClick="triggerClick()" id="profileDisplay" class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar"></center>
@@ -67,37 +103,37 @@ include('includes/sidewrapper.php');
 
 <div class="form-group">
     <label for="inputUsername" >Username</label>
-    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">  </div>
+    <input type="text" name="updateUsername" value="<?php echo $rows['username']; ?>" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">  </div>
 <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <input type="email" name="updateEmail" class="form-control" value="<?php echo $rows['email']; ?>" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <input type="password" name="updatePassword" class="form-control" value="<?php echo $rows['password']; ?>"id="exampleInputPassword1" placeholder="Password">
   </div>
   <div class="form-group ">
   <label for="form_phone" class=" col-form-label">Phone</label>
-    <input class="form-control" type="tel" placeholder="+92-12345678" id="form_phone">
+    <input class="form-control" name="updatePhone" type="tel" value="<?php echo $rows['phone']; ?>" placeholder="+92-12345678" id="form_phone">
 </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity" placeholder="Karachi">
+      <input type="text" name="updateCity" class="form-control" value="<?php echo $rows['city']; ?>" id="inputCity" placeholder="Karachi">
     </div>
     <div class="form-group col-md-6">
       <label for="inputCountry">Country</label>
-      <input type="text" class="form-control" id="inputCountry" placeholder="Pakistan">
+      <input type="text" name="updateCountry" class="form-control" id="inputCountry" value="<?php echo $rows['country']; ?>"placeholder="Pakistan">
     </div>
     </div>
   <div class="form-group">
     <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" class="form-control" name="updateAddress" value="<?php echo $rows['address']; ?>" id="inputAddress" placeholder="1234 Main St">
   </div>
   <div class="form-group">
       <label>Secret Question</label>
-      <select class="form-control">
-        <option selected>Choose...</option>
+      <select class="form-control" name="updateSec_question">
+        <option><?php echo $rows['sec_ques']; ?></option>
         <option>What is your pet name?</option>
         <option>Which is your favourite movie?</option>
         <option>Who is your favourite cricketer?</option>
@@ -105,12 +141,15 @@ include('includes/sidewrapper.php');
     </div>
     <div class="form-group">
     <label for="inputtext">Secret Answer</label>
-    <input type="text" class="form-control" id="inputtext" placeholder="Shahid Afridi">
+    <input type="text" name="updateSec_answer" class="form-control" value="<?php echo $rows['sec_ans']; ?>" id="inputtext" placeholder="Shahid Afridi">
   </div>
 <center>
-  <button type="submit" class="btn btn-primary">Save</button>
+  <button type="submit" name="profileUpdate" class="btn btn-primary">Save</button>
   <br/><br/>
  </center>
+ <?php
+        }
+ ?>
         </form>
 
 </div>

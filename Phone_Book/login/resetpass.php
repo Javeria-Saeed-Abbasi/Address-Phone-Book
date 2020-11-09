@@ -24,12 +24,14 @@ require_once ('../db/config.php');
 <body>
 <?php
 if(isset($_POST['reset-password'])){
+    $email = $_POST['email'];
     $password = $_POST['password'];
     $re_password = $_POST['re-enter-password'];
-    if($password!=$re_password) {
+
+    if($password != $re_password) {
 		echo"<script>alert('Password does not match the confirm password field'.)</script>";
 	} else{
-        $query = "UPDATE `registered_users` SET `password`= '.$password.';" ;
+        $query = "UPDATE `registered_users` SET `password`= '".$password."' WHERE `email` = '".$email."'; ";
     
     $result = mysqli_query($dbConn, $query);
     if(mysqli_query($dbConn,$query)){
@@ -61,7 +63,10 @@ if(isset($_POST['reset-password'])){
               </div>        
               <br/> <br/> 
           <h3 class=" mb-3 font-weight-normal text-center">Reset Password</h3>
-            
+          <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+         </div>
           <label for="inputPassword">New Password</label>
           <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 

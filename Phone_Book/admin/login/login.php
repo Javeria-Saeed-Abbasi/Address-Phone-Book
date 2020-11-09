@@ -52,7 +52,6 @@ $result = mysqli_query ($dbConn , $query);
 
 if ($result->num_rows > 0) {
 while($rows= mysqli_fetch_array($result)){
-  
   $_SESSION['id'] = $rows['id'];
   // $_SESSION['message'] = "You are logged in";
   $_SESSION['username'] = $username ;

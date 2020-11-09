@@ -108,12 +108,12 @@ include('includes/navbar.php');
               </div>        
               <br/><br/> 
               <?php
-$id = $_GET['id'];
-$query="SELECT * FROM `registered_users` WHERE id= $id " ;
-$results = mysqli_query($dbConn, $query);
-  while($row = mysqli_fetch_array($results))
-  {
-  ?>
+              $id = $_GET['id'];
+              $query="SELECT * FROM `registered_users` WHERE id= $id " ;
+              $results = mysqli_query($dbConn, $query);
+                while($row = mysqli_fetch_array($results))
+              {
+              ?>
           <h3 class=" mb-3 font-weight-normal">Update <?php echo $row['username']; ?> </h3>
           </div>
 

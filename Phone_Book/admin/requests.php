@@ -193,7 +193,7 @@ include('includes/footer.php');
     $('#request-data').DataTable({
        dom: 'Bfrtip',
       buttons: [
-        'copy', 'excel','csv','pdf'
+       'excel','csv','pdf'
     ]
     });
 

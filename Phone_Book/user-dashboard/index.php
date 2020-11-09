@@ -184,7 +184,7 @@ include('includes/footer.php');
     $('#contacts').DataTable({
        dom: 'Bfrtip',
       buttons: [
-        'copy', 'excel','csv','pdf'
+        'excel','csv','pdf'
     ]
     });
 

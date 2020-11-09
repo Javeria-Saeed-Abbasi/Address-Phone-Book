@@ -4,7 +4,8 @@ session_start();
 if(empty($_SESSION['username'])){
   header('location:login/login.php');
 }
-
+$id = $_SESSION['id'];
+var_dump($id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +34,30 @@ if(empty($_SESSION['username'])){
 </style>
 </head>
 <body>
+<?php
+if(isset($_POST['profileUpdate'])){
+  $id = $_SESSION['id'];
+//    $contact_id = $_POST['contact_id'];
+$username = $_POST['updateUsername'];
+$email = $_POST['updateEmail'];
+$password = $_POST['updatePassword'];
 
+  
+  
+$query = "UPDATE `admin` SET `username`='".$username."',`email`='".$email."',`password`='".$password."' WHERE `id` ='".$id."'; ";
+$result = mysqli_query($dbConn, $query);
+if($result){
+ 
+ echo '<script> alert("Data Updated Successfully."); </script>';
+ header("Location:index.php");
+}
+else  {
+   echo '<script> alert("Data Not Updated"); </script>' .$dbConn->error;  
+
+}	
+exit();
+}
+?>
 <?php
 include('includes/navbar.php');
 ?>
@@ -52,22 +76,32 @@ include('includes/sidewrapper.php');
 			<div class="card-body">
 				
 				<div class=" col-md-8 col-lg-6 mx-auto bg-warning" id="edit-admin-profile" >
-<form class="md-form" method="post" id="admin-profile-form">
+        <?php
+				$id = $_SESSION['id']; 
+				$query="SELECT * FROM `admin` WHERE id='$id'; ";
+				$results = mysqli_query($dbConn, $query);
+				while($rows = mysqli_fetch_array($results))
+				{
+  					?>
+<form class="md-form" action="profile.php?id=<?= $id; ?>" method="post" id="admin-profile-form">
 <div class="form-group">
     <label for="inputUsername" >Username</label>
-    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">  </div>
+    <input type="text" name="updateUsername" value="<?php echo $rows['username']; ?>" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">  </div>
 <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <input type="email"  name="updateEmail" value="<?php echo $rows['email']; ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <input type="text" name="updatePassword" value="<?php echo $rows['password']; ?>" class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
 <center>
-  <button type="submit" class="btn btn-primary">Save</button>
+  <button type="submit" name="profileUpdate" class="btn btn-primary">Save</button>
   <br/><br/>
  </center>
+ <?php
+        }
+ ?>
         </form>
 
 </div>
