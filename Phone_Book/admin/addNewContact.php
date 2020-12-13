@@ -25,11 +25,9 @@ session_start();
 </head>
 <body>
 <?php
-     $userid = $_GET['id'];
-     var_dump($userid);
     if(isset($_POST['insertData']))
     {
-     $userid = $_GET['id'];
+	 $userid = $_GET['id'];
       $firstname = $_POST['firstname'];
       $lastname = $_POST['lastname'];
       $email = $_POST['email'];
@@ -69,7 +67,7 @@ session_start();
 				
 				<div class=" col-6 col-sm-6 col-md-6 mx-auto" id="edit-contact">
 					<!-- <h5 class="card-title">Fields with <span class="text-danger">*</span> are mandatory!</h5> -->
-					<form method="POST" action="addNewContact.php">
+					<form method="POST" >
 						<div class="form-group ">
 							<label>First Name </label>
 							<!-- <input type="text" name="firstname" id="firstname" class="form-control" value="<?php echo $row[0]['username']; ?>" placeholder="Enter first name" required> -->
