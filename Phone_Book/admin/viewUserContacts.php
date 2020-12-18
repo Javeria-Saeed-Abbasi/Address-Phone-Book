@@ -113,7 +113,7 @@ include('includes/sidewrapper.php');
                     </div>
                     <br/>
                     
-                    <a class="btn btn-danger mt-3" href="#" role="button"><i class="fa fa-trash"></i>  Delete All</a>
+                    <!-- <a class="btn btn-danger mt-3" href="#" role="button"><i class="fa fa-trash"></i>  Delete All</a> -->
                     </center>
 
 </div>

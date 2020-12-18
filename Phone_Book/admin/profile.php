@@ -5,7 +5,7 @@ if(empty($_SESSION['username'])){
   header('location:login/login.php');
 }
 $id = $_SESSION['id'];
-var_dump($id);
+// var_dump($id);
 ?>
 <!DOCTYPE html>
 <html lang="en">

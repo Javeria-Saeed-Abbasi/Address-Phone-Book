@@ -1,7 +1,9 @@
 <?php
 require('../db/config.php');
-// session_start();
-$query = " DELETE FROM `users_contact`;";
+session_start();
+$userid = $_SESSION['id'];
+var_dump ($userid);
+$query = " DELETE FROM `users_contact` WHERE `user-id` = '$userid' ;";
 
 $results = mysqli_query($dbConn, $query);
 if(mysqli_query($dbConn,$query)){
